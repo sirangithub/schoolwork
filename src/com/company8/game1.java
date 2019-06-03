@@ -47,9 +47,9 @@ public class game1 {
        String CHS=String.valueOf(chs);
        int count=1;
        //将用户输入的字符串转换成char数组类型
-       while(!str.toUpperCase().equals(CHS)){
-           if(str.toUpperCase().equals("EXIT")){
-               System.out.println("游戏结束，最终得分为0");
+       while(!CHS.equals(str.toUpperCase())){
+           if("EXIT".equals(str.toUpperCase())){
+               System.out.println("感谢参与！下次再见！");
                System.exit(0);
            }
            System.out.println(input);
