@@ -63,6 +63,7 @@ public class game1 {
         }
         System.out.println("恭喜全部正确");
        System.out.println("花费次数："+count+"\n得分为："+(510-10*count));
+       System.exit(0);
         /**
          * length和length()
          * 属性和方法
