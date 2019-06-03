@@ -49,6 +49,10 @@ public class game1 {
        int count=1;
        //将用户输入的字符串转换成char数组类型
        while(!str.toUpperCase().equals(CHS)){
+           if(str.toUpperCase().equals("EXIT")){
+               System.out.println("游戏结束，最终得分为0");
+               System.exit(0);
+           }
            System.out.println(input);
            boolean []arr=trueNum(chs,input);
            System.out.println("对的位置："+ Arrays.toString(arr));
