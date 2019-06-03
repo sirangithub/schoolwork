@@ -23,25 +23,38 @@ public class game1 {
         }
         return chs;
     }
+    public static int[] trueNum(char chs[],char input[]){
+        int[] trueNum=new int[2];
+        trueNum[0]=0;
+        trueNum[1]=0;
+        for(int i=0;i<input.length;i++){
+            for(int j=0;j<chs.length;j++){
+                if(chs[i]==input[j]){
+                    trueNum[0]++;//对的字符
+                    if(i==j){
+                        trueNum[1]++;//对的位子
+                    }
+                }
+
+            }
+        }
+        return trueNum;
+    }
+
     public static void main(String[] args){
        int b=0+10;
-       int count=0;
        System.out.println(b);
        System.out.println(rnumber());
        Scanner scan=new Scanner(System.in);
        //获取控制台输入的字符
         System.out.println("请输入要猜的字符：");
        String str=scan.next();
-      // System.out.println(str);
-       //char[] 类型？
-        // 将用户输入的字符串转换成char数组类型
+       //将用户输入的字符串转换成char数组类型
         char[] input =str.toCharArray();
-       /* for(int i=0;i<rnumber().length;i++){
-            if(input[i].equals(rnumber()[i])
-            count++;
-        }*/
         System.out.println(input);
-        System.out.println(count);
+        int []index=trueNum(rnumber(),input);
+        System.out.println("对的字符数："+index[0]);
+        System.out.println("对的位置："+index[1]);
         /**
          * length和length()
          * 属性和方法
