@@ -1,5 +1,7 @@
 package com.company8;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class game1 {
@@ -23,38 +25,40 @@ public class game1 {
         }
         return chs;
     }
-    public static int[] trueNum(char chs[],char input[]){
-        int[] trueNum=new int[2];
-        trueNum[0]=0;
-        trueNum[1]=0;
+    public static boolean[] trueNum(char chs[],char input[]){
+        boolean[] arr=new boolean[5];
         for(int i=0;i<input.length;i++){
-            for(int j=0;j<chs.length;j++){
-                if(chs[i]==input[j]){
-                    trueNum[0]++;//对的字符
-                    if(i==j){
-                        trueNum[1]++;//对的位子
-                    }
-                }
-
-            }
+           if(chs[i]==input[i]){
+               arr[i]=true;
+           }
         }
-        return trueNum;
+        return arr;
     }
-
     public static void main(String[] args){
        int b=0+10;
        System.out.println(b);
-       System.out.println(rnumber());
+       char[] chs=new char[5];
+        chs= rnumber();
+       System.out.println(chs);
        Scanner scan=new Scanner(System.in);
        //获取控制台输入的字符
         System.out.println("请输入要猜的字符：");
        String str=scan.next();
+        char[] input =str.toUpperCase().toCharArray();
+       String CHS=String.valueOf(chs);
+       int count=1;
        //将用户输入的字符串转换成char数组类型
-        char[] input =str.toCharArray();
-        System.out.println(input);
-        int []index=trueNum(rnumber(),input);
-        System.out.println("对的字符数："+index[0]);
-        System.out.println("对的位置："+index[1]);
+       while(!str.toUpperCase().equals(CHS)){
+           System.out.println(input);
+           boolean []arr=trueNum(chs,input);
+           System.out.println("对的位置："+ Arrays.toString(arr));
+           System.out.println("请重新输入：");
+           count++;
+           str=scan.next();
+           input =str.toUpperCase().toCharArray();
+        }
+        System.out.println("恭喜全部正确");
+       System.out.println("花费次数："+count+"\n得分为："+(510-10*count));
         /**
          * length和length()
          * 属性和方法
