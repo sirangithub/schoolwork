@@ -25,17 +25,23 @@ public class game1 {
     }
     public static void main(String[] args){
        int b=0+10;
+       int count=0;
        System.out.println(b);
        System.out.println(rnumber());
        Scanner scan=new Scanner(System.in);
        //获取控制台输入的字符
         System.out.println("请输入要猜的字符：");
        String str=scan.next();
-       System.out.println(str);
+      // System.out.println(str);
        //char[] 类型？
         // 将用户输入的字符串转换成char数组类型
         char[] input =str.toCharArray();
+       /* for(int i=0;i<rnumber().length;i++){
+            if(input[i].equals(rnumber()[i])
+            count++;
+        }*/
         System.out.println(input);
+        System.out.println(count);
         /**
          * length和length()
          * 属性和方法
