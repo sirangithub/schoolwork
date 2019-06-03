@@ -35,14 +35,13 @@ public class game1 {
         return arr;
     }
     public static void main(String[] args){
-       int b=0+10;
-       System.out.println(b);
+       System.out.println("欢迎来到字母猜猜猜游戏");
        char[] chs=new char[5];
         chs= rnumber();
-       System.out.println(chs);
+       //System.out.println(chs);
        Scanner scan=new Scanner(System.in);
        //获取控制台输入的字符
-        System.out.println("请输入要猜的字符：");
+        System.out.println("游戏开始，请输入五个不同字母的序列：");
        String str=scan.next();
         char[] input =str.toUpperCase().toCharArray();
        String CHS=String.valueOf(chs);
