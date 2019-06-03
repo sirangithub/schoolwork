@@ -41,7 +41,7 @@ public class game1 {
        //System.out.println(chs);
        Scanner scan=new Scanner(System.in);
        //获取控制台输入的字符
-        System.out.println("游戏开始，请输入五个不同字母的序列：");
+        System.out.println("游戏开始，请输入五个不同字母的序列(输入EXIT，退出游戏)：");
        String str=scan.next();
         char[] input =str.toUpperCase().toCharArray();
        String CHS=String.valueOf(chs);
