@@ -6,15 +6,16 @@ import java.util.Scanner;
 
 public class game1 {
     public static int a;
-    public static char[] rnumber(){
+    public static char[] rnumber(int choose){
         char[] letters={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
-        char []chs=new char[5];
+        char []chs=new char[choose];
         boolean[] flags=new boolean[letters.length];//默认值为false
         //随机选出字母
         /*int num =(int)(Math.random()*letters.length);
         for(int i=0;i<a.length;i++) {
             a[i]=letters[num];
         }*/
+
         int num;
         for(int i=0;i<chs.length;i++) {
             do {
@@ -25,8 +26,8 @@ public class game1 {
         }
         return chs;
     }
-    public static boolean[] trueNum(char chs[],char input[]){
-        boolean[] arr=new boolean[5];
+    public static boolean[] trueNum(char chs[],char input[],int choose){
+        boolean[] arr=new boolean[choose];
         for(int i=0;i<input.length;i++){
            if(chs[i]==input[i]){
                arr[i]=true;
@@ -35,14 +36,21 @@ public class game1 {
         return arr;
     }
     public static void main(String[] args){
-       System.out.println("欢迎来到字母猜猜猜游戏");
-       char[] chs=new char[5];
-        chs= rnumber();
-       //System.out.println(chs);
+       System.out.println("欢迎来到字母猜猜猜游戏\n请选择游戏难度（即要猜的字母数量,输入0退出游戏）：");
+       Scanner in=new Scanner(System.in);
+       int choose=in.nextInt();
+        if(choose==0){
+            System.out.println("感谢参与！下次再见！");
+            System.exit(0);
+        }
+       System.out.println("游戏开始，请输入"+(choose)+"个不同字母的序列(输入EXIT，退出游戏)：");
+
+       char[] chs;
+        chs= rnumber(choose);
+       System.out.println(chs);
        Scanner scan=new Scanner(System.in);
        //获取控制台输入的字符
-        System.out.println("游戏开始，请输入五个不同字母的序列(输入EXIT，退出游戏)：");
-       String str=scan.next();
+        String str=scan.next();
         char[] input =str.toUpperCase().toCharArray();
        String CHS=String.valueOf(chs);
        int count=1;
@@ -53,7 +61,7 @@ public class game1 {
                System.exit(0);
            }
            System.out.println(input);
-           boolean []arr=trueNum(chs,input);
+           boolean []arr=trueNum(chs,input,choose);
            System.out.println("对的位置："+ Arrays.toString(arr));
            System.out.println("请重新输入：");
            count++;

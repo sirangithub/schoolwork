@@ -34,13 +34,16 @@ public class Demo {
          * 创建默认的无参构造了，这时候，需要我们自己创建
          * 一个无参构造
          */
-        TuXing[] area=new TuXing[6];
-        area[0]=new FangXing(12.00);
-        area[1]=new FangXing(13.00);
-        area[2]=new FangXing(11.00);
-        area[3]=new YuanXing(10.00);
-        area[4]=new YuanXing(11.00);
-        area[5]=new YuanXing(12.00);
+        TuXing[] area=new TuXing[9];
+        area[0]=new YuanXing(21.2);
+        area[1]=new YuanXing(21.3);
+        area[2]=new YuanXing(21.3);
+        area[3]=new FangXing(20.0);
+        area[4]=new FangXing(20.2);
+        area[5]=new FangXing(19.9);
+        area[6]=new DuoBianXing(19.8);
+        area[7]=new DuoBianXing(19.7);
+        area[8]=new DuoBianXing(20.2);
         for(int i=0;i<area.length;i++){
             for(int j=i;j<area.length;j++){
                 if(area[i].area()<area[j].area()){
