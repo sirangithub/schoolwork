@@ -228,7 +228,5 @@ public class UserDaoImpl implements IBaseDAO {
             userDao.update(list);*/
         //System.out.println(userDao.getUser(1000000001));
         //System.out.println(userDao.getList());
-
-
     }
 }
