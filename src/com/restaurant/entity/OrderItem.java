@@ -1,11 +1,13 @@
 package com.restaurant.entity;
 
+import java.io.Serializable;
+
 /**
  * @author zhangrong
  * 点菜信息实体类
  */
 
-public class OrderItem {
+public class OrderItem implements Serializable {
     private int id;  //点菜序号
     private int orderId;  //订单编号（外键）
     private int dishId;  //菜品编号（外键）

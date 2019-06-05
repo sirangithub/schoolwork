@@ -1,12 +1,13 @@
 package com.restaurant.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author zhangrong
  * 开台信息实体类
  */
-public class Order {
+public class Order implements Serializable {
     private int id;  //订单序号
     private String orderNo;  //订单编号（自动生成，由当前日期+4位随机数）
     private int deskId;  //餐台号（外键）

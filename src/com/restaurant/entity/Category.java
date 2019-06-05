@@ -1,10 +1,12 @@
 package com.restaurant.entity;
 
+import java.io.Serializable;
+
 /**
  * @author zhangrong
  * 菜品分类实体类
  */
-public class Category {
+public class Category implements Serializable {
     private int id;  //菜品分类序号
     private String name;  //菜品分类名称
     private String describ;  //菜品描述

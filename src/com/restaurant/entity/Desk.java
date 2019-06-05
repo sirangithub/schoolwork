@@ -1,10 +1,12 @@
 package com.restaurant.entity;
 
+import java.io.Serializable;
+
 /**
  * @author zhangrong
  * 餐台信息实体类
  */
-public class Desk {
+public class Desk implements Serializable {
     private int id;  //餐台序号
     private String no;  //餐台编号
     private int seating;  //座位数

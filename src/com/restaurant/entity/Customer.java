@@ -1,10 +1,12 @@
 package com.restaurant.entity;
 
+import java.io.Serializable;
+
 /**
  * @author zhangrong
  * 客户信息实体类
  */
-public class Customer {
+public class Customer implements Serializable {
     private int id;  //客户序号
     private String name;  //客户用户名
     private String sex;  //客户性别

@@ -1,13 +1,14 @@
 package com.restaurant.entity;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author zhangrong
  * 员工信息实体类
  */
-public class Employee {
+public class Employee implements Serializable {
     private int id; //员工序号
     private String name;  //员工用户名
     private String sex;  //员工性别
