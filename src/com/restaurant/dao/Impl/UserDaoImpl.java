@@ -212,20 +212,19 @@ public class UserDaoImpl implements IBaseDAO {
         /**
          * 检测修改
          */
-           /* List<Changed> list = new ArrayList();
-            Changed ch = new Changed();
-            ch.setId(1000000002);
-            ch.setCol(1);
-            ch.setValue("李老板");
-            list.add(ch);
-            userDao.update(list);*/
-            /*List<Changed> list = new ArrayList();
-            Changed ch = new Changed();
-            ch.setId(1000000002);
-            ch.setCol(2);
-            ch.setValue("123");
-            list.add(ch);
-            userDao.update(list);*/
+        /* List<Changed> list = new ArrayList();
+           Changed ch = new Changed();
+           ch.setId(1000000002);
+           ch.setCol(1);
+           ch.setValue("李老板");
+           list.add(ch);*/
+         /*List<Changed> list = new ArrayList();
+          Changed ch = new Changed();
+          ch.setId(1000000002);
+          ch.setCol(2);
+          ch.setValue("123");
+          list.add(ch);
+          userDao.update(list);*/
         //System.out.println(userDao.getUser(1000000001));
         //System.out.println(userDao.getList());
     }

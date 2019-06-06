@@ -18,58 +18,82 @@ public class Employee implements Serializable {
     private String tel;  //员工电话
     private String position;  //员工职位
     private String freeze; //是否在值
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getSex() {
         return sex;
     }
+
     public void setSex(String sex) {
         this.sex = sex;
     }
+
     public Date getBirthday() {
         return birthday;
     }
+
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
+
     public String getIdentityID() {
         return identityID;
     }
+
     public void setIdentityID(String identityID) {
         this.identityID = identityID;
     }
+
     public String getAddress() {
         return address;
     }
+
     public void setAddress(String address) {
         this.address = address;
     }
+
     public String getTel() {
         return tel;
     }
+
     public void setTel(String tel) {
         this.tel = tel;
     }
+
     public String getPosition() {
         return position;
     }
+
     public void setPosition(String position) {
         this.position = position;
     }
+
     public String getFreeze() {
         return freeze;
     }
+
     public void setFreeze(String freeze) {
         this.freeze = freeze;
+    }
+
+    @Override
+    public String toString() {
+        return id + "," + name + "," + sex + "," + birthday + "," + identityID + "," + address + "," + tel + "," +
+                position + "," + freeze + "\n";
     }
 }
