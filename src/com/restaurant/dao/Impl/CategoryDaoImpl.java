@@ -15,6 +15,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * @author zhangrong
+ * 实现菜品分类业务逻辑类
+ */
+
 public class CategoryDaoImpl implements IBaseDAO {
     Category cate;
     public Category getCategoryById(int id) {

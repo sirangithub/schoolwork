@@ -15,6 +15,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * @author zhangrong
+ * 实现管理员业务逻辑类
+ */
 public class UserDaoImpl implements IBaseDAO {
     User user;
 

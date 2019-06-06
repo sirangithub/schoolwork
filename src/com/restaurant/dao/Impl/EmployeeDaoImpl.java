@@ -19,6 +19,11 @@ import java.util.List;
 
 import static com.restaurant.util.Constant.*;
 
+/**
+ * @author zhangrong
+ * 实现员工业务逻辑类
+ */
+
 public class EmployeeDaoImpl implements IBaseDAO {
     public Employee getEmployee(int id) {  //需修改
         Employee employee = new Employee();
