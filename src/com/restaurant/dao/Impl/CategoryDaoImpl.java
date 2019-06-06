@@ -4,6 +4,7 @@ import com.restaurant.JDBConnection;
 import com.restaurant.dao.IBaseDAO;
 import com.restaurant.entity.Category;
 import com.restaurant.util.Changed;
+import javafx.collections.ListChangeListener;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -16,6 +17,74 @@ import java.util.List;
 
 public class CategoryDaoImpl implements IBaseDAO {
     Category cate;
+    public Category getCategoryById(int id) {
+        cate = new Category();
+        Connection conn = JDBConnection.getConn();
+        String sql = "select * from category where id=?";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "取出category数据出错！");
+            e.printStackTrace();
+        }
+        try {
+            rs.next();
+            cate.setId(rs.getInt("id"));
+            cate.setName(rs.getString("name"));
+            cate.setDescrib(rs.getString("describ"));
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "取出category数据出错！");
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "关闭数据连接出错！");
+                e.printStackTrace();
+            }
+        }
+        return cate;
+    }
+    public Category getCategoryByName(String name) {
+        cate = new Category();
+        Connection conn = JDBConnection.getConn();
+        String sql = "select * from category where name=?";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1,name );
+            rs = ps.executeQuery();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "取出category数据出错！");
+            e.printStackTrace();
+        }
+        try {
+            rs.next();
+            cate.setId(rs.getInt("id"));
+            cate.setName(rs.getString("name"));
+            cate.setDescrib(rs.getString("describ"));
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "取出category数据出错！");
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "关闭数据连接出错！");
+                e.printStackTrace();
+            }
+        }
+        return cate;
+    }
 
     @Override
     public List getList() {
@@ -38,6 +107,7 @@ public class CategoryDaoImpl implements IBaseDAO {
                 cate.setId(rs.getInt("id"));
                 cate.setName(rs.getString("name"));
                 cate.setDescrib(rs.getString("describ"));
+                list.add(cate);
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "取出全部数据出错！");
@@ -66,10 +136,12 @@ public class CategoryDaoImpl implements IBaseDAO {
                 Category cate = (Category) it.next();
                 int id = cate.getId();
                 String name = cate.getName();
-                String descib = cate.getDescrib();
-                sql = "insert into category(name,describ) values(?,?)";
+                String describ = cate.getDescrib();
+                sql = "insert into category (id,name,describ) values(?,?,?)";
                 ps = conn.prepareStatement(sql);
-                ps = conn.prepareStatement(name);
+                ps.setInt(1,id);
+                ps.setString(2,name);
+                ps.setString(3,describ);
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
@@ -141,6 +213,42 @@ public class CategoryDaoImpl implements IBaseDAO {
             JOptionPane.showMessageDialog(null, "关闭数据连接出错！");
             e.printStackTrace();
         }
-
+    }
+    public static void main(String[] args){
+        CategoryDaoImpl categoryDao=new CategoryDaoImpl();
+        /**
+         * 检测插入
+         */
+        /*List<Category>list=new ArrayList();
+        Category cate=new Category();
+        cate.setId(123);
+        cate.setName("湘菜");
+        cate.setDescrib("很辣口味很重");
+        list.add(cate);
+        categoryDao.saveList(list);*/
+        /**
+         * 检测删除
+         */
+        //categoryDao.deleteList(123);
+        /**
+         * 检测修改
+         */
+        /*List<Changed>list=new ArrayList();
+        Changed ch=new Changed();
+        ch.setId(123);
+        ch.setCol(1);
+        ch.setValue("家常菜");
+        list.add(ch);
+        categoryDao.update(list);*/
+        /*List<Changed>list=new ArrayList();
+        Changed ch=new Changed();
+        ch.setId(123);
+        ch.setCol(2);
+        ch.setValue("口味真的很重");
+        list.add(ch);
+        categoryDao.update(list);*/
+        //System.out.println(categoryDao.getCategoryById(123));
+        //System.out.println(categoryDao.getCategoryByName("家常菜"));
+        //System.out.println(categoryDao.getList());
     }
 }

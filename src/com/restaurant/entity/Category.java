@@ -28,4 +28,9 @@ public class Category implements Serializable {
     public void setDescrib(String describ) {
         this.describ = describ;
     }
+
+    @Override
+    public String toString() {
+        return id+","+name+","+describ+"\n";
+    }
 }
