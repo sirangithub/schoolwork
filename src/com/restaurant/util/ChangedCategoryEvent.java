@@ -1,4 +1,8 @@
-package com.restaurant.util;
+//package com.restaurant.util;
+
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.TableModel;
+import java.awt.*;
 
 /**
  * @author zhangrong
@@ -6,5 +10,27 @@ package com.restaurant.util;
  * 主要id、新值、列数
  */
 
-public class ChangedCategoryEvent {
-}
+/*public class ChangedCategoryEvent {
+    //ChangedCategoryModel model=null;
+    public ChangedCategoryEvent(ChangedCategoryModel model){
+        this.model=model;
+    }
+    List list=model.getChangeList();
+    int id=0;
+    String value="";
+    public void tableChanged(TableModelEvent arg0){
+        int row=arg0.getFirstRow();
+        int col=arg0.getColumn();
+        if(col!=-1){
+            Changed cp=new Changed();
+            id=(Integer)model.getValueAt(row,0).intValue();
+            if(id!=0){
+                value=model.getValueAt(row,col).toString();
+                cp.setId(id);
+                cp.setCol(col);
+                cp.setValue(value);
+                list.add(cp);
+            }
+        }
+    }
+}*/
