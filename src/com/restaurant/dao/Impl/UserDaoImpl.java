@@ -61,7 +61,7 @@ public class UserDaoImpl implements IBaseDAO {
     @Override
     public List getList() {//查询用户
         Connection conn = JDBConnection.getConn();
-        String sql = "select * from user";
+        String sql = "select * from user order by id asc";
         PreparedStatement ps = null;
         ResultSet rs = null;
         List list = new ArrayList(); //将从数据库中的数据取出存入list集合

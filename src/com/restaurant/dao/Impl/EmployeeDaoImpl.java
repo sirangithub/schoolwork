@@ -26,9 +26,10 @@ import static com.restaurant.util.Constant.*;
  */
 
 public class EmployeeDaoImpl implements IBaseDAO {
-    public Employee getEmployee(List list) {  //需修改
+    Employee employee;
+    public Employee getEmployee(List list) {
         Connection conn = JDBConnection.getConn();
-        Employee employee = new Employee();
+        employee = new Employee();
         Iterator it=list.iterator();
         int col=0;
         String obid="";
@@ -86,7 +87,7 @@ public class EmployeeDaoImpl implements IBaseDAO {
             employee.setPosition(rs.getString("position"));
             employee.setFreeze(rs.getString("freeze"));
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "取出user数据出错！");
+            JOptionPane.showMessageDialog(null, "取出employee数据出错！");
             e.printStackTrace();
         } finally {
             try {
@@ -104,7 +105,7 @@ public class EmployeeDaoImpl implements IBaseDAO {
     @Override
     public List getList() {
         Connection conn = JDBConnection.getConn();
-        String sql = "select * from employee";
+        String sql = "select * from employee order by id asc";
         PreparedStatement ps = null;
         ResultSet rs = null;
         List list = new ArrayList(); //将从数据库中的数据取出存入list集合
@@ -356,6 +357,9 @@ public class EmployeeDaoImpl implements IBaseDAO {
         ch.setValue(OFF_FREEZE);
         list.add(ch);
         employeeDao.update(list);*/
+        /**
+         * 检查条件查询
+         */
         /*List<Changed2> list=new ArrayList<>();
         Changed2 ch2=new Changed2();
         ch2.setObid("2000000001");
