@@ -1,8 +1,9 @@
-//package com.restaurant.util;
+/*package com.restaurant.util;
 
 import javax.swing.event.TableModelEvent;
-import javax.swing.table.TableModel;
-import java.awt.*;
+import javax.swing.event.TableModelListener;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * @author zhangrong
@@ -11,11 +12,11 @@ import java.awt.*;
  */
 
 /*public class ChangedCategoryEvent {
-    //ChangedCategoryModel model=null;
-    public ChangedCategoryEvent(ChangedCategoryModel model){
+    CategoryTableModel model=null;
+    public ChangedCategoryEvent(CategoryTableModel model){
         this.model=model;
     }
-    List list=model.getChangeList();
+    List list=model.getChangelist();
     int id=0;
     String value="";
     public void tableChanged(TableModelEvent arg0){

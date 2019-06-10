@@ -39,7 +39,7 @@ public class MainFrame extends JFrame {
 	 * 
 	 * 
 	 * 
-	 * �ܶ����û��д
+	 * 很多代码没有写
 	 */
 	
 	
