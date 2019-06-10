@@ -25,7 +25,7 @@ public class CategoryDaoImpl implements IBaseDAO {
     public Category getCategoryById(int id) {
         cate = new Category();
         Connection conn = JDBConnection.getConn();
-        String sql = "select * from category where id=?";
+        String sql = "1select * from category where id=?";
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
