@@ -49,4 +49,9 @@ public class Customer implements Serializable {
     public void setCardID(String cardID) {
         this.cardID = cardID;
     }
+
+    @Override
+    public String toString() {
+        return id+","+name+","+sex+","+company+","+tel+","+cardID+"\n";
+    }
 }

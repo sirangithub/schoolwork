@@ -4,6 +4,7 @@ import com.restaurant.JDBConnection;
 import com.restaurant.dao.IBaseDAO;
 import com.restaurant.entity.Employee;
 import com.restaurant.util.Changed;
+import com.restaurant.util.Changed2;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -25,15 +26,49 @@ import static com.restaurant.util.Constant.*;
  */
 
 public class EmployeeDaoImpl implements IBaseDAO {
-    public Employee getEmployee(int id) {  //需修改
-        Employee employee = new Employee();
+    public Employee getEmployee(List list) {  //需修改
         Connection conn = JDBConnection.getConn();
-        String sql = "select * from employee where id=? ";
+        Employee employee = new Employee();
+        Iterator it=list.iterator();
+        int col=0;
+        String obid="";
+        String sql="";
+        //String sql = "select * from employee where id=? ";
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
+            while(it.hasNext()){
+                Changed2 ch=(Changed2)it.next();
+                obid=ch.getObid();
+                col=ch.getCol();
+                switch (col){
+                    case 1:
+                        sql="select * from employee where id=?";
+                        break;
+                    case 2:
+                        sql="select * from employee where name=?";
+                        break;
+                    case 3:
+                        sql="select * from employee where sex=?";
+                        break;
+                    case 4:
+                        sql="select * from employee where identityID=?";
+                        break;
+                    case 5:
+                        sql="select * from employee where position=?";
+                        break;
+                    case 6:
+                        sql="select * from employee where freeze=?";
+                        break;
+
+                }
+            }
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, id);
+            if(col==1){
+                ps.setInt(1, Integer.parseInt(obid));
+            }else {
+                ps.setString(1,obid);
+            }
             rs = ps.executeQuery();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "取出employee数据出错！");
@@ -321,6 +356,37 @@ public class EmployeeDaoImpl implements IBaseDAO {
         ch.setValue(OFF_FREEZE);
         list.add(ch);
         employeeDao.update(list);*/
+        /*List<Changed2> list=new ArrayList<>();
+        Changed2 ch2=new Changed2();
+        ch2.setObid("2000000001");
+        ch2.setCol(1);
+        list.add(ch2);*/
+        /*List<Changed2> list=new ArrayList<>();
+        Changed2 ch2=new Changed2();
+        ch2.setObid("李明");
+        ch2.setCol(2);
+        list.add(ch2);*/
+        /*List<Changed2> list=new ArrayList<>();
+        Changed2 ch2=new Changed2();
+        ch2.setObid("女");
+        ch2.setCol(3);
+        list.add(ch2);*/
+        /*List<Changed2> list=new ArrayList<>();
+        Changed2 ch2=new Changed2();
+        ch2.setObid("430196199606072165");
+        ch2.setCol(4);
+        list.add(ch2);*/
+        /*List<Changed2> list=new ArrayList<>();
+        Changed2 ch2=new Changed2();
+        ch2.setObid(CASHIER);
+        ch2.setCol(5);
+        list.add(ch2);*/
+        /*List<Changed2> list=new ArrayList<>();
+        Changed2 ch2=new Changed2();
+        ch2.setObid(OFF_FREEZE);
+        ch2.setCol(6);
+        list.add(ch2);*/
+        //System.out.println(employeeDao.getEmployee(list));
         //System.out.println(employeeDao.getEmployee(2000000001));
         //System.out.println(employeeDao.getList());
     }
