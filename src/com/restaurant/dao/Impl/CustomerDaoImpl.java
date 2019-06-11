@@ -14,6 +14,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+/**
+ * @author zhangrong
+ * 实现客户业务逻辑类
+ */
 
 import static com.restaurant.util.Constant.*;
 
@@ -134,20 +138,18 @@ public class CustomerDaoImpl implements IBaseDAO {
             Iterator it=list.iterator();
             while (it.hasNext()){
                 Customer customer=(Customer)it.next();
-                int id=customer.getId();
                 String name=customer.getName();
                 String sex=customer.getSex();
                 String company=customer.getCompany();
                 String tel=customer.getTel();
                 String cardID=customer.getCardID();
-                sql="insert into customer(id,name,sex,company,tel,cardID) values(?,?,?,?,?,?)";
+                sql="insert into customer(name,sex,company,tel,cardID) values(?,?,?,?,?)";
                 ps=conn.prepareStatement(sql);
-                ps.setInt(1,id);
-                ps.setString(2,name);
-                ps.setString(3,sex);
-                ps.setString(4,company);
-                ps.setString(5,tel);
-                ps.setString(6,cardID);
+                ps.setString(1,name);
+                ps.setString(2,sex);
+                ps.setString(3,company);
+                ps.setString(4,tel);
+                ps.setString(5,cardID);
                 ps.executeUpdate();
             }
         }catch (SQLException e){
@@ -244,7 +246,6 @@ public class CustomerDaoImpl implements IBaseDAO {
          */
         /*List<Customer> list=new ArrayList<>();
         Customer customer=new Customer();
-        customer.setId(1);
         customer.setName("许琼方");
         customer.setSex(MALE);
         customer.setCompany("长沙学院");
@@ -262,35 +263,35 @@ public class CustomerDaoImpl implements IBaseDAO {
         //Customer customer=new Customer();
         /*List<Changed> list=new ArrayList<>();
         Changed ch=new Changed();
-        ch.setId(1);
+        ch.setId(301);
         ch.setValue("许董事长");
         ch.setCol(1);
         list.add(ch);
         customerDao.update(list);*/
         /*List<Changed> list=new ArrayList<>();
         Changed ch=new Changed();
-        ch.setId(1);
+        ch.setId(301);
         ch.setValue(FEMALE);
         ch.setCol(2);*/
         /*List<Changed> list=new ArrayList<>();
         Changed ch=new Changed();
-        ch.setId(1);
+        ch.setId(301);
         ch.setValue("长沙学院");
         ch.setCol(3);*/
         /*List<Changed> list=new ArrayList<>();
         Changed ch=new Changed();
-        ch.setId(1);
+        ch.setId(301);
         ch.setValue("13474589263");
         ch.setCol(4);*/
         /*List<Changed> list=new ArrayList<>();
         Changed ch=new Changed();
-        ch.setId(1);
+        ch.setId(301);
         ch.setValue("A627245030");
         ch.setCol(5);
         list.add(ch);
         customerDao.update(list);*/
-        List<Changed2> list=new ArrayList<>();
-        Changed2 ch2=new Changed2();
+        //List<Changed2> list=new ArrayList<>();
+        //Changed2 ch2=new Changed2();
         /*ch2.setObid("1");
         ch2.setCol(1);*/
         /*ch2.setObid("许董事长");

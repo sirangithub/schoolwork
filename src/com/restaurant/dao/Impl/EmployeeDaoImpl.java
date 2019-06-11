@@ -157,7 +157,6 @@ public class EmployeeDaoImpl implements IBaseDAO {
             Iterator it = list.iterator();
             while (it.hasNext()) {
                 Employee employee = (Employee) it.next();
-                int id = employee.getId();
                 String name = employee.getName();
                 String sex = employee.getSex();
                 Date birthday = employee.getBirthday();
@@ -166,18 +165,17 @@ public class EmployeeDaoImpl implements IBaseDAO {
                 String tel = employee.getTel();
                 String position = employee.getPosition();
                 String freeze = employee.getFreeze();
-                sql = "insert into employee(id,name,sex,birthday,identityID,address,tel,position,freeze)" +
-                        "values(?,?,?,?,?,?,?,?,?)";
+                sql = "insert into employee(name,sex,birthday,identityID,address,tel,position,freeze)" +
+                        "values(?,?,?,?,?,?,?,?)";
                 ps = conn.prepareStatement(sql);
-                ps.setInt(1, id);
-                ps.setString(2, name);
-                ps.setString(3, sex);
-                ps.setDate(4, (java.sql.Date) birthday);
-                ps.setString(5, identityID);
-                ps.setString(6, address);
-                ps.setString(7, tel);
-                ps.setString(8, position);
-                ps.setString(9, freeze);
+                ps.setString(1, name);
+                ps.setString(2, sex);
+                ps.setDate(3, (java.sql.Date) birthday);
+                ps.setString(4, identityID);
+                ps.setString(5, address);
+                ps.setString(6, tel);
+                ps.setString(7, position);
+                ps.setString(8, freeze);
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
@@ -286,8 +284,7 @@ public class EmployeeDaoImpl implements IBaseDAO {
         /**
          * 检测插入
          */
-        /* List<Employee>list=new ArrayList();
-        employee.setId(2000000001);
+        /*List<Employee>list=new ArrayList();
         employee.setName("小李");
         employee.setSex(MALE);
         Date date=new Date();
@@ -302,25 +299,25 @@ public class EmployeeDaoImpl implements IBaseDAO {
         /**
          * 检测删除
          */
-        //employeeDao.deleteList(2000000001);
+        //employeeDao.deleteList(201);
         /**
          * 检测修改
          */
         /*List<Changed> list = new ArrayList();
         Changed ch = new Changed();
-        ch.setId(2000000001);
+        ch.setId(201);
         ch.setCol(1);
         ch.setValue("李明");
         list.add(ch);*/
         /*List<Changed> list = new ArrayList();
         Changed ch = new Changed();
-        ch.setId(2000000001);
+        ch.setId(201);
         ch.setCol(2);
         ch.setValue(FEMALE);
         list.add(ch);*/
         /*List<Changed> list = new ArrayList();
         Changed ch = new Changed();
-        ch.setId(2000000001);
+        ch.setId(201);
         ch.setCol(3);
         String datestr="1996-06-07";
         Date date=sdf.parse(datestr);
@@ -328,31 +325,31 @@ public class EmployeeDaoImpl implements IBaseDAO {
         list.add(ch);*/
         /*List<Changed> list = new ArrayList();
         Changed ch = new Changed();
-        ch.setId(2000000001);
+        ch.setId(201);
         ch.setCol(4);
         ch.setValue("430196199606072165");
         list.add(ch);*/
         /*List<Changed> list = new ArrayList();
         Changed ch = new Changed();
-        ch.setId(2000000001);
+        ch.setId(201);
         ch.setCol(5);
         ch.setValue("花园居民小区");
         list.add(ch);*/
         /*List<Changed> list = new ArrayList();
         Changed ch = new Changed();
-        ch.setId(2000000001);
+        ch.setId(201);
         ch.setCol(6);
         ch.setValue("13701028868");
         list.add(ch);*/
         /*List<Changed> list = new ArrayList();
         Changed ch = new Changed();
-        ch.setId(2000000001);
+        ch.setId(201);
         ch.setCol(7);
         ch.setValue(CASHIER);
         list.add(ch);*/
         /*List<Changed> list = new ArrayList();
         Changed ch = new Changed();
-        ch.setId(2000000001);
+        ch.setId(201);
         ch.setCol(8);
         ch.setValue(OFF_FREEZE);
         list.add(ch);
@@ -362,7 +359,7 @@ public class EmployeeDaoImpl implements IBaseDAO {
          */
         /*List<Changed2> list=new ArrayList<>();
         Changed2 ch2=new Changed2();
-        ch2.setObid("2000000001");
+        ch2.setObid("201");
         ch2.setCol(1);
         list.add(ch2);*/
         /*List<Changed2> list=new ArrayList<>();
@@ -391,7 +388,7 @@ public class EmployeeDaoImpl implements IBaseDAO {
         ch2.setCol(6);
         list.add(ch2);*/
         //System.out.println(employeeDao.getEmployee(list));
-        //System.out.println(employeeDao.getEmployee(2000000001));
+        //System.out.println(employeeDao.getEmployee(201));
         //System.out.println(employeeDao.getList());
     }
 }

@@ -103,19 +103,14 @@ public class UserDaoImpl implements IBaseDAO {
         Connection conn = JDBConnection.getConn();
         PreparedStatement ps = null;
         try {
-            Iterator it = list.iterator();
-            while (it.hasNext()) {
-                User user = (User) it.next();
-                int id = user.getId();
-                String username = user.getUsername();
-                String password = user.getPassword();
-                sql = "insert into user(id,username,password) values (?,?,?)";
+                String username = list.get(0).toString();
+                String password = "123";
+                sql = "insert into user(username,password) values (?,?)";
                 ps = conn.prepareStatement(sql);
-                ps.setInt(1, id);
-                ps.setString(2, username);
-                ps.setString(3, password);
+                ps.setString(1, username);
+                ps.setString(2, password);
                 ps.executeUpdate();
-            }
+
         } catch (SQLException e) {
             System.out.println("添加数据时出错！");
             JOptionPane.showMessageDialog(null, "添加数据时出错！");
@@ -202,34 +197,30 @@ public class UserDaoImpl implements IBaseDAO {
         /**
          * 检测插入
          */
-       /*List<User> list = new ArrayList();
-        User user = new User();
-        user.setId(1000000002);
-        user.setUsername("李四");
-        user.setPassword("123456");
-        list.add(user);
+      /* List<String> list = new ArrayList();
+        list.add("李四");
         userDao.saveList(list);*/
         /**
          * 检测删除
          */
-        //userDao.deleteList(1000000002);
+        //userDao.deleteList(102);
         /**
          * 检测修改
          */
         /* List<Changed> list = new ArrayList();
            Changed ch = new Changed();
-           ch.setId(1000000002);
+           ch.setId(102);
            ch.setCol(1);
            ch.setValue("李老板");
            list.add(ch);*/
          /*List<Changed> list = new ArrayList();
           Changed ch = new Changed();
-          ch.setId(1000000002);
+          ch.setId(102);
           ch.setCol(2);
           ch.setValue("123");
           list.add(ch);
           userDao.update(list);*/
-        //System.out.println(userDao.getUser(1000000001));
+        //System.out.println(userDao.getUser(101));
         //System.out.println(userDao.getList());
     }
 }

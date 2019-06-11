@@ -139,14 +139,12 @@ public class CategoryDaoImpl implements IBaseDAO {
             Iterator it = list.iterator();
             while (it.hasNext()) {
                 Category cate = (Category) it.next();
-                int id = cate.getId();
                 String name = cate.getName();
                 String describ = cate.getDescrib();
-                sql = "insert into category (id,name,describ) values(?,?,?)";
+                sql = "insert into category (name,describ) values(?,?)";
                 ps = conn.prepareStatement(sql);
-                ps.setInt(1,id);
-                ps.setString(2,name);
-                ps.setString(3,describ);
+                ps.setString(1,name);
+                ps.setString(2,describ);
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
@@ -224,9 +222,8 @@ public class CategoryDaoImpl implements IBaseDAO {
         /**
          * 检测插入
          */
-        /*List<Category>list=new ArrayList();
+       /* List<Category>list=new ArrayList();
         Category cate=new Category();
-        cate.setId(123);
         cate.setName("湘菜");
         cate.setDescrib("很辣口味很重");
         list.add(cate);
@@ -240,19 +237,19 @@ public class CategoryDaoImpl implements IBaseDAO {
          */
         /*List<Changed>list=new ArrayList();
         Changed ch=new Changed();
-        ch.setId(123);
+        ch.setId(1101);
         ch.setCol(1);
         ch.setValue("家常菜");
         list.add(ch);
         categoryDao.update(list);*/
         /*List<Changed>list=new ArrayList();
         Changed ch=new Changed();
-        ch.setId(123);
+        ch.setId(1101);
         ch.setCol(2);
         ch.setValue("口味真的很重");
         list.add(ch);
         categoryDao.update(list);*/
-        //System.out.println(categoryDao.getCategoryById(123));
+        //System.out.println(categoryDao.getCategoryById(1101));
         //System.out.println(categoryDao.getCategoryByName("家常菜"));
         //System.out.println(categoryDao.getList());
     }
