@@ -21,7 +21,6 @@ import java.util.List;
  */
 public class UserDaoImpl implements IBaseDAO {
     User user;
-
     public User getUser(int id) {
         user = new User();
         Connection conn = JDBConnection.getConn();
