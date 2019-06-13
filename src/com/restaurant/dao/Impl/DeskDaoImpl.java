@@ -22,11 +22,11 @@ import static com.restaurant.util.Constant.*;
  * 实现餐台业务逻辑类
  */
 public class DeskDaoImpl implements IBaseDAO {
-    Desk desk = new Desk();
+    Desk desk ;
 
     public List getDesk(List list) {
         Connection conn = JDBConnection.getConn();
-        desk = new Desk();
+        //desk = new Desk();
         Iterator it = list.iterator();
         int col = 0;
         String obid = "";
@@ -70,6 +70,7 @@ public class DeskDaoImpl implements IBaseDAO {
         }
         try {
             while (rs.next()) {
+                desk=new Desk();
                 desk.setId(rs.getInt("id"));
                 desk.setNo(rs.getString("no"));
                 desk.setSeating(rs.getInt("seating"));

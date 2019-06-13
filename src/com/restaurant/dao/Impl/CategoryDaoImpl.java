@@ -23,7 +23,7 @@ import java.util.List;
 public class CategoryDaoImpl implements IBaseDAO {
     Category cate;
     public Category getCategoryById(int id) {
-        cate = new Category();
+
         Connection conn = JDBConnection.getConn();
         String sql = "1select * from category where id=?";
         PreparedStatement ps = null;
@@ -38,6 +38,7 @@ public class CategoryDaoImpl implements IBaseDAO {
         }
         try {
             rs.next();
+            cate = new Category();
             cate.setId(rs.getInt("id"));
             cate.setName(rs.getString("name"));
             cate.setDescrib(rs.getString("describ"));
@@ -57,7 +58,7 @@ public class CategoryDaoImpl implements IBaseDAO {
         return cate;
     }
     public Category getCategoryByName(String name) {
-        cate = new Category();
+
         Connection conn = JDBConnection.getConn();
         String sql = "select * from category where name=?";
         PreparedStatement ps = null;
@@ -72,6 +73,7 @@ public class CategoryDaoImpl implements IBaseDAO {
         }
         try {
             rs.next();
+            cate = new Category();
             cate.setId(rs.getInt("id"));
             cate.setName(rs.getString("name"));
             cate.setDescrib(rs.getString("describ"));

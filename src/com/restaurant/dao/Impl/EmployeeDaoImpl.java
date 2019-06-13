@@ -30,7 +30,7 @@ public class EmployeeDaoImpl implements IBaseDAO {
 
     public List getEmployee(List list) {
         Connection conn = JDBConnection.getConn();
-        employee = new Employee();
+
         Iterator it = list.iterator();
         int col = 0;
         String obid = "";
@@ -79,6 +79,7 @@ public class EmployeeDaoImpl implements IBaseDAO {
         }
         try {
             while (rs.next()) {
+                employee = new Employee();
                 employee.setId(rs.getInt("id"));
                 employee.setName(rs.getString("name"));
                 employee.setSex(rs.getString("sex"));

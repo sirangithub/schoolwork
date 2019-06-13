@@ -26,7 +26,6 @@ public class CustomerDaoImpl implements IBaseDAO {
 
     public List getCustomer(List list) {
         Connection conn = JDBConnection.getConn();
-        customer = new Customer();
         Iterator it = list.iterator();
         int col = 0;
         String obid = "";
@@ -68,6 +67,7 @@ public class CustomerDaoImpl implements IBaseDAO {
         }
         try {
             while (rs.next()) {
+                customer = new Customer();
                 customer.setId(rs.getInt("id"));
                 customer.setName(rs.getString("name"));
                 customer.setSex(rs.getString("sex"));
