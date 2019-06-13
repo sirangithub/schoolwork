@@ -27,48 +27,50 @@ import static com.restaurant.util.Constant.*;
 
 public class EmployeeDaoImpl implements IBaseDAO {
     Employee employee;
-    public Employee getEmployee(List list) {
+
+    public List getEmployee(List list) {
         Connection conn = JDBConnection.getConn();
         employee = new Employee();
-        Iterator it=list.iterator();
-        int col=0;
-        String obid="";
-        String sql="";
+        Iterator it = list.iterator();
+        int col = 0;
+        String obid = "";
+        String sql = "";
+        List<Employee> list1 = new ArrayList();
         //String sql = "select * from employee where id=? ";
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            while(it.hasNext()){
-                Changed2 ch=(Changed2)it.next();
-                obid=ch.getObid();
-                col=ch.getCol();
-                switch (col){
+            while (it.hasNext()) {
+                Changed2 ch = (Changed2) it.next();
+                obid = ch.getObid();
+                col = ch.getCol();
+                switch (col) {
                     case 1:
-                        sql="select * from employee where id=?";
+                        sql = "select * from employee where id=?";
                         break;
                     case 2:
-                        sql="select * from employee where name=?";
+                        sql = "select * from employee where name=? order by id asc ";
                         break;
                     case 3:
-                        sql="select * from employee where sex=?";
+                        sql = "select * from employee where sex=? order by id asc";
                         break;
                     case 4:
-                        sql="select * from employee where identityID=?";
+                        sql = "select * from employee where identityID=?";
                         break;
                     case 5:
-                        sql="select * from employee where position=?";
+                        sql = "select * from employee where position=? order by id asc";
                         break;
                     case 6:
-                        sql="select * from employee where freeze=?";
+                        sql = "select * from employee where freeze=?";
                         break;
 
                 }
             }
             ps = conn.prepareStatement(sql);
-            if(col==1){
+            if (col == 1) {
                 ps.setInt(1, Integer.parseInt(obid));
-            }else {
-                ps.setString(1,obid);
+            } else {
+                ps.setString(1, obid);
             }
             rs = ps.executeQuery();
         } catch (SQLException e) {
@@ -76,16 +78,18 @@ public class EmployeeDaoImpl implements IBaseDAO {
             e.printStackTrace();
         }
         try {
-            rs.next();
-            employee.setId(rs.getInt("id"));
-            employee.setName(rs.getString("name"));
-            employee.setSex(rs.getString("sex"));
-            employee.setBirthday(rs.getDate("birthday"));
-            employee.setIdentityID(rs.getString("identityID"));
-            employee.setAddress(rs.getString("address"));
-            employee.setTel(rs.getString("tel"));
-            employee.setPosition(rs.getString("position"));
-            employee.setFreeze(rs.getString("freeze"));
+            while (rs.next()) {
+                employee.setId(rs.getInt("id"));
+                employee.setName(rs.getString("name"));
+                employee.setSex(rs.getString("sex"));
+                employee.setBirthday(rs.getDate("birthday"));
+                employee.setIdentityID(rs.getString("identityID"));
+                employee.setAddress(rs.getString("address"));
+                employee.setTel(rs.getString("tel"));
+                employee.setPosition(rs.getString("position"));
+                employee.setFreeze(rs.getString("freeze"));
+                list1.add(employee);
+            }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "取出employee数据出错！");
             e.printStackTrace();
@@ -99,7 +103,7 @@ public class EmployeeDaoImpl implements IBaseDAO {
                 e.printStackTrace();
             }
         }
-        return employee;
+        return list1;
     }
 
     @Override
@@ -277,22 +281,23 @@ public class EmployeeDaoImpl implements IBaseDAO {
 
     }
 
-    public static SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-    public static void main(String[] args)throws ParseException {
+    public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+    public static void main(String[] args) throws ParseException {
         EmployeeDaoImpl employeeDao = new EmployeeDaoImpl();
         Employee employee = new Employee();
         /**
          * 检测插入
          */
         /*List<Employee>list=new ArrayList();
-        employee.setName("小李");
+        employee.setName("李明");
         employee.setSex(MALE);
         Date date=new Date();
         employee.setBirthday(new java.sql.Date(date.getTime()));
-        employee.setIdentityID("430196198104052215");
+        employee.setIdentityID("430196198105056215");
         employee.setAddress("花园小区");
-        employee.setTel("13700008888");
-        employee.setPosition(WAITER);
+        employee.setTel("13700008316");
+        employee.setPosition(DOTR);
         employee.setFreeze(ON_FREEZE);
         list.add(employee);
         employeeDao.saveList(list);*/
@@ -367,9 +372,9 @@ public class EmployeeDaoImpl implements IBaseDAO {
         ch2.setObid("李明");
         ch2.setCol(2);
         list.add(ch2);*/
-        /*List<Changed2> list=new ArrayList<>();
-        Changed2 ch2=new Changed2();
-        ch2.setObid("女");
+        /*List<Changed2> list = new ArrayList<>();
+        Changed2 ch2 = new Changed2();
+        ch2.setObid(MALE);
         ch2.setCol(3);
         list.add(ch2);*/
         /*List<Changed2> list=new ArrayList<>();

@@ -4,6 +4,7 @@ import com.restaurant.JDBConnection;
 import com.restaurant.dao.IBaseDAO;
 import com.restaurant.entity.Desk;
 import com.restaurant.util.Changed;
+import com.restaurant.util.Changed2;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -22,6 +23,74 @@ import static com.restaurant.util.Constant.*;
  */
 public class DeskDaoImpl implements IBaseDAO {
     Desk desk = new Desk();
+
+    public List getDesk(List list) {
+        Connection conn = JDBConnection.getConn();
+        desk = new Desk();
+        Iterator it = list.iterator();
+        int col = 0;
+        String obid = "";
+        String sql = "";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Desk> list1=new ArrayList<>();
+        try {
+            while (it.hasNext()) {
+                Changed2 ch2 = (Changed2) it.next();
+                obid = ch2.getObid();
+                col = ch2.getCol();
+                switch (col) {
+                    case 1:
+                        sql = "select * from desk where id=? ";
+                        break;
+                    case 2:
+                        sql = "select * from desk where no=?";
+                        break;
+                    case 3:
+                        sql = "select * from desk where seating=? order by id";
+                        break;
+                    case 4:
+                        sql = "select * from desk where seating>=? order by id";
+                        break;
+                    case 5:
+                        sql = "select * from desk where status=? order by id";
+                        break;
+                }
+            }
+            ps = conn.prepareStatement(sql);
+            if (col == 2 || col == 5) {
+                ps.setString(1, obid);
+            } else {
+                ps.setInt(1, Integer.parseInt(obid));
+            }
+            rs = ps.executeQuery();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "取出employee数据出错！");
+            e.printStackTrace();
+        }
+        try {
+            while (rs.next()) {
+                desk.setId(rs.getInt("id"));
+                desk.setNo(rs.getString("no"));
+                desk.setSeating(rs.getInt("seating"));
+                desk.setStatus(rs.getString("status"));
+                list1.add(desk);
+            }
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "取出employee数据出错！");
+            e.printStackTrace();
+        }finally {
+            try {
+                rs.close();
+                ps.close();
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "关闭数据连接时出错！");
+                e.printStackTrace();
+            }
+        }
+        return list1;
+    }
 
     @Override
     public List getList() {
@@ -186,17 +255,17 @@ public class DeskDaoImpl implements IBaseDAO {
         /**
          * 测试修改
          */
-        List<Changed> list = new ArrayList<>();
+        /*List<Changed> list = new ArrayList<>();
         Changed ch = new Changed();
-        ch.setId(1201);
+        ch.setId(1201);*/
         /*ch.setCol(1);
         ch.setValue("12");*/
-        ch.setCol(2);
-        ch.setValue("12");
+        /*ch.setCol(2);
+        ch.setValue("12");*/
         /*ch.setCol(3);
         ch.setValue(UNBOOKED);*/
-        list.add(ch);
-        deskDao.update(list);
+        /*list.add(ch);
+        deskDao.update(list);*/
         System.out.println(deskDao.getList());
 
     }
