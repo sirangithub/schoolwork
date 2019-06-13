@@ -65,7 +65,7 @@ public class DeskDaoImpl implements IBaseDAO {
             }
             rs = ps.executeQuery();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "取出employee数据出错！");
+            JOptionPane.showMessageDialog(null, "取出desk数据出错！");
             e.printStackTrace();
         }
         try {
@@ -77,7 +77,7 @@ public class DeskDaoImpl implements IBaseDAO {
                 list1.add(desk);
             }
         }catch (SQLException e){
-            JOptionPane.showMessageDialog(null, "取出employee数据出错！");
+            JOptionPane.showMessageDialog(null, "取出desk数据出错！");
             e.printStackTrace();
         }finally {
             try {
@@ -266,7 +266,24 @@ public class DeskDaoImpl implements IBaseDAO {
         ch.setValue(UNBOOKED);*/
         /*list.add(ch);
         deskDao.update(list);*/
-        System.out.println(deskDao.getList());
+        /**
+         * 测试条件查询
+         */
+        Changed2 ch2=new Changed2();
+        List<Changed2> list= new ArrayList<>();
+        /*ch2.setObid("1201");
+        ch2.setCol(1);*/
+        /*ch2.setObid("1");
+        ch2.setCol(2);*/
+        /*ch2.setObid("12");
+        ch2.setCol(3);*/
+        ch2.setObid("8");
+        ch2.setCol(4);
+        /*ch2.setObid(UNBOOKED);
+        ch2.setCol(5);*/
+        list.add(ch2);
+        System.out.println(deskDao.getDesk(list));
+        //System.out.println(deskDao.getList());
 
     }
 }
