@@ -16,7 +16,7 @@ public class DishTableModel extends AbstractTableModel {
      */
     private static List changeList = new ArrayList();
     private List list = new ArrayList();
-    private String[] column = { "编号", "类别", "名称","图片","代码", "单位","单价","状态"};
+    private String[] column = { "编号", "类别编号", "名称","图片","代码", "单位","单价","状态"};
     public DishTableModel() {
     }
     public DishTableModel(List list) {
@@ -135,7 +135,7 @@ public class DishTableModel extends AbstractTableModel {
                 dish.setUnit(value);
                 break;
             case 6:
-                dish.setPrice(Integer.parseInt(value));
+                dish.setPrice(Double.parseDouble(value));
                 break;
             case 7:
                 dish.setStatus(value);

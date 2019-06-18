@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 public class DishesAddDialog extends JDialog {
@@ -96,7 +98,7 @@ public class DishesAddDialog extends JDialog {
                 dish.setPic(picTxt.getText());
                 dish.setCode(codeTxt.getText());
                 dish.setUnit(unitTxt.getText());
-                dish.setPrice(Integer.parseInt(priceTxt.getText()));
+                dish.setPrice(Double.parseDouble(priceTxt.getText()));
                 dish.setStatus(statusTxt.getText());
                 ddi.save(dish);
 

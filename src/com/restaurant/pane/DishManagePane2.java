@@ -47,10 +47,10 @@ public class DishManagePane2 extends JPanel {
             table = new JTable(getModel());
             table.setEnabled(true);
             table.setRowSelectionAllowed(true);
-            //table.setBackground(Color.blue);
-            table.setSelectionForeground(Color.yellow);
-            table.setSelectionBackground(Color.GRAY);
-            //table.setForeground(Color.red);
+            table.setBackground(Color.BLACK);
+            table.setSelectionForeground(Color.YELLOW);
+            table.setSelectionBackground(Color.RED);
+            table.setForeground(Color.WHITE);
             /**
              * 隐藏第一列ID,不显示出来
              */

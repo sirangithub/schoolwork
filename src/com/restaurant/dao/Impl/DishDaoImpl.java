@@ -133,9 +133,9 @@ public class DishDaoImpl implements IBaseDAO{
             while (rs.next()) {
                 Dish dish = new Dish();
                 dish.setId(rs.getInt(1));
-                category=cdi.getCategoryById(rs.getInt(2));
+                dish.setName(rs.getString(2));
+                category=cdi.getCategoryById(rs.getInt(3));
                 dish.setCategory(category);
-                dish.setName(rs.getString(3));
                 dish.setPic(rs.getString(4));
                 dish.setCode(rs.getString(5));
                 dish.setUnit(rs.getString(6));
