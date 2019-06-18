@@ -24,8 +24,7 @@ public class MainFrame extends JFrame {
     CategoryManagePane2 cateManaPane2;
     DishManagePane2 dishManaPane2;
     DeskManagePane2 deskManaPane2;
-
-
+    OrderManagePane2 orderManaPane2;
     /**
      *
      *
@@ -127,8 +126,8 @@ public class MainFrame extends JFrame {
         cateManaPane2=new CategoryManagePane2();
         dishManaPane2=new DishManagePane2();
         deskManaPane2=new DeskManagePane2();
+        orderManaPane2=new OrderManagePane2();
         /**
-         *
          *
          *
          *
@@ -182,6 +181,15 @@ public class MainFrame extends JFrame {
                 // TODO Auto-generated method stub
                 panel.removeAll();
                 panel.add("dmp",deskManaPane2);
+                panel.validate();
+                repaint();
+            }
+        });
+        orderManage.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panel.removeAll();;
+                panel.add("omp",orderManaPane2);
                 panel.validate();
                 repaint();
             }

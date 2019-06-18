@@ -1,4 +1,4 @@
-/*package com.restaurant.dao.Impl;
+package com.restaurant.dao.Impl;
 
 import com.restaurant.JDBConnection;
 import com.restaurant.dao.IBaseDAO;
@@ -18,74 +18,33 @@ import java.util.List;
 
 public class OrderDaoImpl implements IBaseDAO {
     Order order;
-    public List getOrder(List list){
-        Connection conn = JDBConnection.getConn();
-        //desk = new Desk();
-        Iterator it = list.iterator();
-        int col = 0;
-        String obid = "";
-        String sql = "";
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        List<Order> list1=new ArrayList<>();
+    public Order getOrderById(int id) {
+        order=new Order();
+        Connection conn=JDBConnection.getConn();
+        String s1="select * from orderinfo where id=?";
+        PreparedStatement ps=null;
+        ResultSet rs=null;
         try {
-            while (it.hasNext()) {
-                Changed2 ch2 = (Changed2) it.next();
-                obid = ch2.getObid();
-                col = ch2.getCol();
-                switch (col) {
-                    case 1:
-                        sql = "select * from orderinfo where id=? ";
-                        break;
-                    case 2:
-                        sql = "select * from orderinfo where orderno=?";
-                        break;
-                    case 3:
-                        sql = "select * from orderinfo where deskid=?";
-                        break;
-                    case 4:
-                        sql = "select * from orderinfo where createtime=? order by id";
-                        break;
-                    case 5:
-                        sql = "select * from orderinfo where customerid=? ";
-                        break;
-                    case 7:
-                        sql = "select * from orderinfo where status=? order by id ";
-                        break;
-                    case 8:
-                        sql = "select * from orderinfo where number=? ";
-                        break;
-                }
-            }
-            ps = conn.prepareStatement(sql);
-            if (col == 2 || col == 7) {
-                ps.setString(1, obid);
-            }else if(col==4){
-                ps.setDate(1, java.sql.Date.valueOf(obid));
-            }
-            else {
-                ps.setInt(1, Integer.parseInt(obid));
-            }
-            rs = ps.executeQuery();
+            ps=conn.prepareStatement(s1);
+            ps.setInt(1, id);
+            rs=ps.executeQuery();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "取出desk数据出错！");
+            JOptionPane.showMessageDialog(null, "取出order全部数据出错");
             e.printStackTrace();
         }
         try {
-            while (rs.next()) {
-                order=new Order();
-                order.setId(rs.getInt("id"));
-                order.setOrderNo(rs.getString("orderno"));
-                order.setDeskId(rs.getInt("deskid"));
-                order.setCreatetime(rs.getDate("createtime"));
-                order.setMoney(rs.getDouble("money"));
-                order.setCustomerId(rs.getInt("customerid"));
-                order.setStatus(rs.getString("status"));
-                order.setNumber(rs.getInt("number"));
-                list1.add(order);
-            }
-        }catch (SQLException e){
-            JOptionPane.showMessageDialog(null, "取出order数据出错！");
+            rs.next();
+            order.setId(rs.getInt("id"));
+            order.setOrderNo(rs.getString("orderNo"));
+            order.setDeskId(rs.getInt("deskId"));
+            order.setCreatetime(rs.getString("crestetime"));
+            order.setMoney(rs.getDouble("money"));
+            order.setCustomerId(rs.getInt("customerId"));
+            order.setStatus(rs.getString("status"));
+            order.setNumber(rs.getInt("number"));
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "取出order数据出错");
             e.printStackTrace();
         }finally {
             try {
@@ -93,11 +52,12 @@ public class OrderDaoImpl implements IBaseDAO {
                 ps.close();
                 conn.close();
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "关闭数据连接时出错！");
+                // TODO Auto-generated catch block
+                JOptionPane.showMessageDialog(null, "关闭数据连接时出错");
                 e.printStackTrace();
             }
         }
-        return list1;
+        return order;
     }
     @Override
     public List getList() {
@@ -105,7 +65,7 @@ public class OrderDaoImpl implements IBaseDAO {
         String sql = "select * from orderinfo order by id asc";
         PreparedStatement ps = null;
         ResultSet rs = null;
-        List list = new ArrayList(); //将从数据库中的数据取出存入list集合
+        List list = new ArrayList();
         try {
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -118,9 +78,11 @@ public class OrderDaoImpl implements IBaseDAO {
             while (rs.next()) {
                 order= new Order();
                 order.setId(rs.getInt("id"));
-                order.setOrderNo(rs.getString("orderno"));
-                order.setDeskId(rs.getInt("deskid"));
-                order.setCreatetime(rs.getDate("createtime"));
+                order.setOrderNo(rs.getString("orderNo"));
+                order.setDeskId(rs.getInt("deskId"));
+                order.setCreatetime(rs.getString("createtime"));
+                order.setMoney(rs.getDouble("money"));
+                order.setCustomerId(rs.getInt("customerId"));
                 order.setStatus(rs.getString("status"));
                 order.setNumber(rs.getInt("number"));
                 list.add(order);
@@ -137,8 +99,8 @@ public class OrderDaoImpl implements IBaseDAO {
                 JOptionPane.showMessageDialog(null, "关闭数据连接时出错！");
                 e.printStackTrace();
             }
-            return list;
         }
+        return list;
     }
 
     @Override
@@ -147,29 +109,33 @@ public class OrderDaoImpl implements IBaseDAO {
         Connection conn = JDBConnection.getConn();
         PreparedStatement ps = null;
         try {
-            String orderno = order.getOrderNo();
-            int deskID=order.getDeskId();
-            Date createtime=order.getCreatetime();
-            double money=order.getMoney();
-            int customerID=order.getCustomerId();
-            String status=order.getStatus();
-            int number=order.getNumber();
-            sql = "insert into orderinfo(orderno,deskid,createtime,money,customerid,status,,number) values (?,?,?,?,?,?,?)";
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, orderno);
-            ps.setInt(2,deskID);
-            ps.setDate(3, (java.sql.Date) createtime);
-            ps.setDouble(4,money);
-            ps.setInt(5,customerID);
-            ps.setString(6,status);
-            ps.setInt(7,number);
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
+            Iterator it=list.iterator();
+            while (it.hasNext()) {
+                Order order=(Order) it.next();
+                int id=order.getId();
+                String orderNo = order.getOrderNo();
+                int deskId=order.getDeskId();
+                String createtime=order.getCreatetime();
+                double money=order.getMoney();
+                int customerId=order.getCustomerId();
+                String status=order.getStatus();
+                int number=order.getNumber();
+                sql = "insert into orderinfo(orderNo,deskId,createtime,money,customerId,status,number) values (?,?,?,?,?,?,?)";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, orderNo);
+                ps.setInt(2,deskId);
+                ps.setString(3, createtime);
+                ps.setDouble(4,money);
+                ps.setInt(5,customerId);
+                ps.setString(6,status);
+                ps.setInt(7,number);
+                ps.executeUpdate();
+            }
+        }catch (SQLException e) {
             System.out.println("添加数据时出错！");
             JOptionPane.showMessageDialog(null, "添加数据时出错！");
             e.printStackTrace();
-        } finally {
+        }finally {
             try {
                 ps.close();
                 conn.close();
@@ -179,31 +145,34 @@ public class OrderDaoImpl implements IBaseDAO {
                 e.printStackTrace();
             }
         }
-    }
 
+    }
     @Override
-    public void deleteList(int id) {
-        String sql = "delete from orderinfo where id=?";
-        Connection conn = JDBConnection.getConn();
-        PreparedStatement ps = null;
+    public void deleteList(List list) {
+        String str="delete from orderinfo where id=?";
+        int id=0;
+        Iterator it=list.iterator();
+        Connection conn=JDBConnection.getConn();
+        PreparedStatement ps=null;
         try {
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-        } finally {
+            while (it.hasNext()) {
+                id=((Order)it.next()).getId();
+                ps=conn.prepareStatement(str);
+                ps.setInt(1, id);
+                ps.executeUpdate();
+            }
+        } catch (Exception e) {
+        }finally {
             try {
                 ps.close();
                 conn.close();
-                //System.out.println("删除成功");
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "关闭数据连接出错！");
+                // TODO Auto-generated catch block
+                JOptionPane.showMessageDialog(null, "关闭数据连接时出错");
                 e.printStackTrace();
             }
         }
-
     }
-
     @Override
     public void update(List list) {
         Connection conn = JDBConnection.getConn();
@@ -221,21 +190,24 @@ public class OrderDaoImpl implements IBaseDAO {
                 value = ch.getValue();
                 switch (col) {
                     case 1:
-                        sql = "update orderinfo set deskid=? where id=?";
+                        sql = "update orderinfo set orderNo=? where id=?";
                         break;
                     case 2:
-                        sql = "update orderinfo set createtime=? where id=?";
+                        sql = "update orderinfo set deskId=? where id=?";
                         break;
                     case 3:
-                        sql = "update orderinfo set money=? where id=?";
+                        sql = "update orderinfo set createtime=? where id=?";
                         break;
                     case 4:
-                        sql = "update orderinfo set customerid=? where id=?";
+                        sql = "update orderinfo set money=? where id=?";
                         break;
                     case 5:
-                        sql = "update orderinfo set status=? where id=?";
+                        sql = "update orderinfo set customerId=? where id=?";
                         break;
                     case 6:
+                        sql = "update orderinfo set status=? where id=?";
+                        break;
+                    case 7:
                         sql = "update orderinfo set number=? where id=?";
                         break;
                 }
@@ -247,14 +219,6 @@ public class OrderDaoImpl implements IBaseDAO {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "修改数据时出错！");
             e.printStackTrace();
-        } finally {
-            try {
-                ps.close();
-                conn.close();
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "关闭数据连接时出错！");
-                e.printStackTrace();
-            }
         }
     }
-}*/
+}

@@ -11,7 +11,7 @@ public class Order implements Serializable {
     private int id;  //订单序号
     private String orderNo;  //订单编号（自动生成，由当前日期+4位随机数）
     private int deskId;  //餐台号（外键）
-    private Date createtime;  //就餐日期时间
+    private String createtime;  //就餐日期时间
     private double money;  //金额
     private int customerId;  //客户编号
     private String status;  //订单状态：已支付，未支付
@@ -34,10 +34,10 @@ public class Order implements Serializable {
     public void setDeskId(int deskId) {
         this.deskId = deskId;
     }
-    public Date getCreatetime() {
+    public String getCreatetime() {
         return createtime;
     }
-    public void setCreatetime(Date createtime) {
+    public void setCreatetime(String createtime) {
         this.createtime = createtime;
     }
     public double getMoney() {
