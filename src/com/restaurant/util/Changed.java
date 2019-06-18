@@ -1,14 +1,8 @@
 package com.restaurant.util;
-
-/**
- * @author zhangrong
- * 变动类
- */
-
 public class Changed {
-    private int id;  //发生变动的序号
-    private int col;  //发生变动的位置
-    private String value;  //发生变动后的值
+    private int id;  
+    private int col;  
+    private String value;  
     public int getId() {
         return id;
     }
@@ -27,8 +21,6 @@ public class Changed {
     public void setValue(String value) {
         this.value = value;
     }
-
-    @Override
     public String toString() {
         return id+","+col+","+value;
     }

@@ -10,6 +10,6 @@ import java.util.List;
 public interface IBaseDAO {
     public List getList();  //显示表所有信息
     public void saveList(List list);  //增添
-    public void  deleteList(int id);  //删除
+    public void  deleteList(List list);  //删除
     public void update(List list);  //修改
 }

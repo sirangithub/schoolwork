@@ -1,4 +1,4 @@
-package com.restaurant.dao.Impl;
+/*package com.restaurant.dao.Impl;
 
 import com.restaurant.JDBConnection;
 import com.restaurant.dao.IBaseDAO;
@@ -190,4 +190,4 @@ public class OrderitemDaoImpl implements IBaseDAO {
             }
         }
     }
-}
+}*/

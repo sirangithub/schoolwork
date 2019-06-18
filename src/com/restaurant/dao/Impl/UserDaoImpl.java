@@ -1,4 +1,4 @@
-package com.restaurant.dao.Impl;
+/*package com.restaurant.dao.Impl;
 
 import com.restaurant.JDBConnection;
 import com.restaurant.dao.IBaseDAO;
@@ -19,7 +19,7 @@ import java.util.List;
  * @author zhangrong
  * 实现管理员业务逻辑类
  */
-public class UserDaoImpl implements IBaseDAO {
+/*public class UserDaoImpl implements IBaseDAO {
     User user;
     public User getUser(int id) {
         user = new User();
@@ -221,5 +221,5 @@ public class UserDaoImpl implements IBaseDAO {
           userDao.update(list);*/
         //System.out.println(userDao.getUser(101));
         //System.out.println(userDao.getList());
-    }
-}
+//    }*/
+//}*/

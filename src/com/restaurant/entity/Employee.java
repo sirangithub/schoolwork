@@ -12,7 +12,7 @@ public class Employee implements Serializable {
     private int id; //员工序号
     private String name;  //员工用户名
     private String sex;  //员工性别
-    private Date birthday;  //员工出生日期
+    private String birthday;  //员工出生日期
     private String identityID;  //员工身份证号
     private String address;  //员工家庭住址
     private String tel;  //员工电话
@@ -43,11 +43,11 @@ public class Employee implements Serializable {
         this.sex = sex;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
