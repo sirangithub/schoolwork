@@ -2,6 +2,7 @@ package com.restaurant.dao.Impl;
 
 import com.restaurant.JDBConnection;
 import com.restaurant.dao.IBaseDAO;
+import com.restaurant.entity.Category;
 import com.restaurant.entity.Customer;
 import com.restaurant.util.Changed;
 
@@ -18,7 +19,7 @@ import java.util.List;
  * 实现客户业务逻辑类
  */
 
-import static com.restaurant.util.Constant.*;
+
 
 public class CustomerDaoImpl implements IBaseDAO{
 
@@ -104,7 +105,28 @@ public class CustomerDaoImpl implements IBaseDAO{
     @Override
     public void deleteList(List list) {
         // TODO Auto-generated method stub
-
+        String sql="delete from customer where id=?";
+        int id=0;
+        Iterator it=list.iterator();
+        Connection conn=JDBConnection.getConn();
+        PreparedStatement ps=null;
+        try{
+            while(it.hasNext()){
+                id=((Customer)it.next()).getId();
+                ps=conn.prepareStatement(sql);
+                ps.setInt(1,id);
+                ps.executeUpdate();
+            }
+        }catch (SQLException e){
+        }finally {
+            try {
+                ps.close();
+                conn.close();
+            }catch (SQLException e){
+                JOptionPane.showMessageDialog(null, "关闭数据连接时出错");
+                e.printStackTrace();
+            }
+        }
     }
     @Override
     public void update(List list) {

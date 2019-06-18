@@ -8,14 +8,14 @@ import java.io.Serializable;
  * 菜品信息实体类
  */
 public class Dish implements Serializable{
-    int id=-1;
-    private String name=null;
-    private String code=null;
-    private String unit=null;
-    double price=-1;
-    private String status=null;
-    private Category category=null;
-    private String pic=null;
+    int id;
+    private String name;
+    private String code;
+    private String unit;
+    double price;
+    private String status;
+    private Category category;
+    private String pic;
     public int getId() {
         return id;
     }
