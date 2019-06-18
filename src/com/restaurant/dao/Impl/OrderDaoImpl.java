@@ -4,7 +4,6 @@ import com.restaurant.JDBConnection;
 import com.restaurant.dao.IBaseDAO;
 import com.restaurant.entity.Order;
 import com.restaurant.util.Changed;
-import com.restaurant.util.Changed2;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -12,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
