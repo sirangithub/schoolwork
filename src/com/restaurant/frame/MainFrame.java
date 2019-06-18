@@ -15,21 +15,15 @@ public class MainFrame extends JFrame {
     JMenuItem emplManage,custManage,pwdManage,categoryManage,dishesManege,
     aboutmeManage,orderManage,checkoutManage,orderItemManage,deskManage;
     FlowLayout layout=new FlowLayout();
-    /**
-     *
-     *
-     */
+
     EmployeeManagePane2 employeeManaPane2;
     CustomerManagePane2 customerManaPane2;
     CategoryManagePane2 cateManaPane2;
     DishManagePane2 dishManaPane2;
     DeskManagePane2 deskManaPane2;
     OrderManagePane2 orderManaPane2;
-    /**
-     *
-     *
-     *
-     */
+    OrderDishes orderDishes;
+    Check check;
 
     MainFrame(){
         init();
@@ -115,23 +109,15 @@ public class MainFrame extends JFrame {
         panel=new JPanel();
 
 
-
-        /**
-         *
-         *
-         *
-         */
         employeeManaPane2=new EmployeeManagePane2();
         customerManaPane2=new CustomerManagePane2();
         cateManaPane2=new CategoryManagePane2();
         dishManaPane2=new DishManagePane2();
         deskManaPane2=new DeskManagePane2();
         orderManaPane2=new OrderManagePane2();
-        /**
-         *
-         *
-         *
-         */
+        orderDishes=new OrderDishes();
+        check=new Check();
+
         emplManage.addActionListener(new ActionListener() {
 
             @Override
@@ -194,9 +180,28 @@ public class MainFrame extends JFrame {
                 repaint();
             }
         });
-        /**
-         *
-         */
+        orderItemManage.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                panel.removeAll();
+                panel.add("od",orderDishes);
+                panel.validate();
+                repaint();
+            }
+        });
+        checkoutManage.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                panel.removeAll();
+                panel.add("che",check);
+                panel.validate();
+                repaint();
+            }
+        });
         panel.setLayout(layout);
         add(panel);
         setJMenuBar(bar);

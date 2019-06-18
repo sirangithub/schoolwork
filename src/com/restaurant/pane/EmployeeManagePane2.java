@@ -141,8 +141,8 @@ public class EmployeeManagePane2 extends JPanel {
 
 
     public void addEmployee() {
-        Employee staff=new Employee();
-        getModel().addRow(getTable().getSelectedRow(), staff);
+        Employee employee=new Employee();
+        getModel().addRow(getTable().getSelectedRow(), employee);
     }
     public void saveEmployee() {
         IBaseDAO dao= EmployeeDaoFactory.getDao();
