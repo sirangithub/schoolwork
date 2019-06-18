@@ -7,6 +7,7 @@ import com.restaurant.util.EmployeeDaoFactory;
 import com.restaurant.util.EmployeeTableModel;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,15 +45,16 @@ public class EmployeeManagePane2 extends JPanel {
             table=new JTable(getModel());
             table.setEnabled(true);
             table.setRowSelectionAllowed(true);
-            //table.setBackground(Color.white);
-            table.setSelectionForeground(Color.white);
-            table.setSelectionBackground(Color.GRAY);
+            table.setBackground(Color.BLACK);
+            table.setSelectionForeground(Color.YELLOW);
+            table.setSelectionBackground(Color.RED);
+            table.setForeground(Color.WHITE);
             /**
              * 隐藏第一列id,不现实出来
              */
-		   /*DefaultTableColumnModel dcm=(DefaultTableColumnModel) table.getColumnModel();
+		    DefaultTableColumnModel dcm=(DefaultTableColumnModel) table.getColumnModel();
 			dcm.getColumn(0).setMinWidth(0);
-			dcm.getColumn(0).setMaxWidth(0);*/
+			dcm.getColumn(0).setMaxWidth(0);
             return table;
         }
         return table;
@@ -93,7 +95,6 @@ public class EmployeeManagePane2 extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
-                    ////////////////////////////////////////此处为完成
                     addEmployee();
                 }
             });
@@ -130,7 +131,7 @@ public class EmployeeManagePane2 extends JPanel {
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
                     saveEmployee();
-                    JOptionPane.showMessageDialog(null, "更新成功staff数据库成功");
+                    JOptionPane.showMessageDialog(null, "更新成功employee数据库成功");
                 }
             });
             return save;
@@ -148,7 +149,7 @@ public class EmployeeManagePane2 extends JPanel {
         List changeList=getModel().getChangeList();
         if (changeList.size()>0) {
             dao.update(changeList);
-            changeList.clear();/////////////////////////////未知
+            changeList.clear();
         }
         List newRow=getModel().getNewRow();
         if (0<newRow.size()) {
@@ -178,7 +179,6 @@ public class EmployeeManagePane2 extends JPanel {
     public EmployeeManagePane2() {
         initData();
         this.setLayout(new BorderLayout());
-        ///////////////////////////////此处未完成
         add(getPaneTop(),BorderLayout.NORTH);
         add(getPanelBottom(), BorderLayout.SOUTH);
         add(getPanTable(),BorderLayout.CENTER);

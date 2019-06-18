@@ -4,9 +4,9 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import java.util.List;
 
-public class ChangeEmployeeEvent implements TableModelListener {
-    EmployeeTableModel model=null;
-    public ChangeEmployeeEvent(EmployeeTableModel model) {
+public class ChangeDishEvent implements TableModelListener {
+    DishTableModel model=null;
+    public ChangeDishEvent(DishTableModel model) {
         // TODO Auto-generated constructor stub
         this.model=model;
     }
@@ -20,7 +20,7 @@ public class ChangeEmployeeEvent implements TableModelListener {
         int col=arg0.getColumn();
         if (col!=-1) {
             Changed cp=new Changed();
-            id= ((Integer) model.getValueAt(row, 0)).intValue();
+            id=((Integer)model.getValueAt(row, 0)).intValue();
             if (id!=0) {
                 value=model.getValueAt(row, col).toString();
                 cp.setId(id);
@@ -30,5 +30,4 @@ public class ChangeEmployeeEvent implements TableModelListener {
             }
         }
     }
-
 }

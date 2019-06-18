@@ -1,10 +1,11 @@
 package com.restaurant.pane;
 
 import com.restaurant.dao.IBaseDAO;
-import com.restaurant.entity.Category;
-import com.restaurant.util.CategoryDaoFactory;
-import com.restaurant.util.CategoryTableModel;
-import com.restaurant.util.ChangeCategoryEvent;
+import com.restaurant.entity.Dish;
+import com.restaurant.frame.DishesAddDialog;
+import com.restaurant.util.ChangeDishEvent;
+import com.restaurant.util.DishDaoFactory;
+import com.restaurant.util.DishTableModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableColumnModel;
@@ -14,7 +15,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryManagePane2 extends JPanel {
+public class DishManagePane2 extends JPanel {
     private JPanel panelTop = null;
     private JLabel labHeader = null;
     private JPanel panelBottom = null;
@@ -23,20 +24,20 @@ public class CategoryManagePane2 extends JPanel {
     private JButton save = null;
     private JScrollPane scroll = null;
     private JTable table = null;
-    private CategoryTableModel model = null;
-    private List listCategory = null;
-    public CategoryTableModel getModel() {
+    private DishTableModel model = null;
+    private List listDish = null;
+    public DishTableModel getModel() {
         if (null == model) {
-            model = new CategoryTableModel(listCategory);
+            model = new DishTableModel(listDish);
             // 给model添加一个监听,当修改的时候将触发该事件,代表事件的类是ChangeEvent
-            model.addTableModelListener(new ChangeCategoryEvent(model));
+            model.addTableModelListener(new ChangeDishEvent(model));
             return model;
         }
         return model;
     }
     public JLabel getLabHeader() {
         if (null == labHeader) {
-            labHeader = new JLabel("Maintaince Category Information");
+            labHeader = new JLabel("Maintaince Dish Information");
             return labHeader;
         }
         return labHeader;
@@ -46,10 +47,10 @@ public class CategoryManagePane2 extends JPanel {
             table = new JTable(getModel());
             table.setEnabled(true);
             table.setRowSelectionAllowed(true);
-            table.setBackground(Color.BLACK);
-            table.setSelectionForeground(Color.YELLOW);
-            table.setSelectionBackground(Color.RED);
-            table.setForeground(Color.WHITE);
+            //table.setBackground(Color.blue);
+            table.setSelectionForeground(Color.yellow);
+            table.setSelectionBackground(Color.GRAY);
+            //table.setForeground(Color.red);
             /**
              * 隐藏第一列ID,不显示出来
              */
@@ -96,7 +97,8 @@ public class CategoryManagePane2 extends JPanel {
             add = new JButton("添加");
             add.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    addCategory();
+                    DishesAddDialog dad=new DishesAddDialog();
+                    dad.setVisible(true);
                 }
             });
             return add;
@@ -115,7 +117,7 @@ public class CategoryManagePane2 extends JPanel {
                     if (rows.length > 0) {
                         int flag = JOptionPane.showConfirmDialog(null, "确定删除?");
                         if (flag == JOptionPane.YES_OPTION)
-                            deleteCategory();
+                            deleteDish();
                     } else
                         JOptionPane.showMessageDialog(null, "请选择要删除的行！");
                 }
@@ -129,7 +131,7 @@ public class CategoryManagePane2 extends JPanel {
             save = new JButton("保存");
             save.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    saveCategory();
+                    saveDish();
                     JOptionPane.showMessageDialog(null, "更新成功！");
                 }
             });
@@ -137,12 +139,12 @@ public class CategoryManagePane2 extends JPanel {
         }
         return save;
     }
-    public void addCategory() {
-        Category cust = new Category();
-        getModel().addRow(getTable().getSelectedRow(), cust);
+    public void addDish() {
+        Dish dish = new Dish();
+        getModel().addRow(getTable().getSelectedRow(), dish);
     }
-    public void saveCategory() {
-        IBaseDAO dao = CategoryDaoFactory.getDao();
+    public void saveDish() {
+        IBaseDAO dao = DishDaoFactory.getDao();
         List changeList = getModel().getChangeList();
         // 如果有修改过就调用update方法
         if (changeList.size() > 0) {
@@ -158,14 +160,11 @@ public class CategoryManagePane2 extends JPanel {
             newRow.clear();
         }
     }
-    public void deleteCategory() {
-        /**
-         * 支持一次删除多行,先获得所有选中的行,然后按照行数取得Product实例,
-         * 放进一个list,然后传给操作数据库的deleteList方法.
-         */
+    public void deleteDish() {
+
         int[] rows = getTable().getSelectedRows();
         ArrayList list = new ArrayList();
-        IBaseDAO dao = CategoryDaoFactory.getDao();
+        IBaseDAO dao = DishDaoFactory.getDao();
         for (int i = rows.length - 1; i >= 0; i--) {
             list.add(getModel().getRow(rows[i]));
             getModel().deleteRow(rows[i]);
@@ -178,11 +177,11 @@ public class CategoryManagePane2 extends JPanel {
         /**
          * 初始化数据源,从数据库里把数据拿出来,然后它会调用 getValueAt方法来一个单元格一个单元格来设值,让它显示出来.
          */
-        listCategory = new ArrayList();
-        IBaseDAO dao = CategoryDaoFactory.getDao();
-        listCategory = dao.getList();
+        listDish = new ArrayList();
+        IBaseDAO dao = DishDaoFactory.getDao();
+        listDish = dao.getList();
     }
-    public CategoryManagePane2() {
+    public DishManagePane2() {
         initData();
         this.setLayout(new BorderLayout());
         add(getPanelTop(), BorderLayout.NORTH);

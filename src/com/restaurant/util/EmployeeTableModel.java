@@ -43,7 +43,7 @@ public class EmployeeTableModel extends AbstractTableModel {
     @Override
     public int getColumnCount() {
         // TODO Auto-generated method stub
-        return column.length;////////////////////列数
+        return column.length;
     }
 
     @Override
@@ -90,8 +90,8 @@ public class EmployeeTableModel extends AbstractTableModel {
         }
     }
 
-    public List getNewRow() {/////////////////////
-        List list = new ArrayList();////////
+    public List getNewRow() {
+        List list = new ArrayList();
         List listProduct = getList();
         Iterator it = listProduct.iterator();
         while (it.hasNext()) {
@@ -158,13 +158,18 @@ public class EmployeeTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
+    @Override
+    public String getColumnName(int i) {
+        return column[i] ;
+    }
+
     public boolean isCellEditable(int row, int column) {
         return true;
     }
 
     public void setValueAt(Object avalue, int rowIndex, int columnIndex) {
-        Employee staff = (Employee) list.get(rowIndex);
-        setPropertyValueByCol(staff, avalue.toString(), columnIndex);
+        Employee employee = (Employee) list.get(rowIndex);
+        setPropertyValueByCol(employee, avalue.toString(), columnIndex);
         this.fireTableCellUpdated(rowIndex, columnIndex);
     }
 }

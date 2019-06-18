@@ -39,7 +39,7 @@ public class EmployeeDaoImpl implements IBaseDAO {
             rs=ps.executeQuery();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            JOptionPane.showMessageDialog(null, "取出staff全部数据出错");
+            JOptionPane.showMessageDialog(null, "取出employee全部数据出错");
             e.printStackTrace();
         }
         try {
@@ -55,7 +55,7 @@ public class EmployeeDaoImpl implements IBaseDAO {
             employee.setFreeze(rs.getString("freeze"));
         } catch (SQLException e) {
             // TODO: handle exception
-            JOptionPane.showMessageDialog(null, "取出staff数据出错");
+            JOptionPane.showMessageDialog(null, "取出employee数据出错");
             e.printStackTrace();
         }finally {
             try {
@@ -82,7 +82,7 @@ public class EmployeeDaoImpl implements IBaseDAO {
             rs=ps.executeQuery();
         }catch (SQLException e) {
             // TODO Auto-generated catch block
-            JOptionPane.showMessageDialog(null, "取出staff全部数据出错");
+            JOptionPane.showMessageDialog(null, "取出employee全部数据出错");
             e.printStackTrace();
         }
         try {
@@ -98,7 +98,7 @@ public class EmployeeDaoImpl implements IBaseDAO {
             employee.setFreeze(rs.getString("freeze"));
         } catch (SQLException e) {
             // TODO: handle exception
-            JOptionPane.showMessageDialog(null, "取出staff数据出错");
+            JOptionPane.showMessageDialog(null, "取出employee数据出错");
             e.printStackTrace();
         }finally {
             try {
@@ -179,7 +179,7 @@ public class EmployeeDaoImpl implements IBaseDAO {
                 String tel = employee.getTel();
                 String position = employee.getPosition();
                 String freeze = employee.getFreeze();
-                s1 = "insert into staff(name,sex,birthday,identityID,address,tel,position,freeze) values(?,?,?,?,?,?,?,?)";
+                s1 = "insert into employee(name,sex,birthday,identityID,address,tel,position,freeze) values(?,?,?,?,?,?,?,?)";
                 ps = conn.prepareStatement(s1);
                 ps.setString(1, name);
                 ps.setString(2, sex);

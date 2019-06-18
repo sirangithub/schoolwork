@@ -44,8 +44,10 @@ public class DeskManagePane2 extends JPanel {
             table=new JTable(getModel());
             table.setEnabled(true);
             table.setRowSelectionAllowed(true);
-            table.setSelectionForeground(Color.white);
-            table.setSelectionBackground(Color.gray);
+            table.setBackground(Color.BLACK);
+            table.setSelectionForeground(Color.YELLOW);
+            table.setSelectionBackground(Color.RED);
+            table.setForeground(Color.WHITE);
             /**
              *
              */

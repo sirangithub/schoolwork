@@ -3,6 +3,7 @@ package com.restaurant.frame;
 import com.restaurant.dao.IBaseDAO;
 import com.restaurant.pane.CategoryManagePane2;
 import com.restaurant.pane.DeskManagePane2;
+import com.restaurant.pane.DishManagePane2;
 import com.restaurant.pane.EmployeeManagePane2;
 
 import javax.swing.*;
@@ -21,11 +22,10 @@ public class MainFrame extends JFrame {
      *
      *
      *
-     *
-     *
      */
-    EmployeeManagePane2 employeeManagePane2;
-    DeskManagePane2 deskManagePane2;
+    DishManagePane2 dishManaPane2;
+    EmployeeManagePane2 employeeManaPane2;
+    DeskManagePane2 deskManaPane2;
     CategoryManagePane2 cateManaPane2;
 
     /**
@@ -125,9 +125,10 @@ public class MainFrame extends JFrame {
          *
          *
          */
-        employeeManagePane2=new EmployeeManagePane2();
-        deskManagePane2=new DeskManagePane2();
+        employeeManaPane2=new EmployeeManagePane2();
+        deskManaPane2=new DeskManagePane2();
         cateManaPane2=new CategoryManagePane2();
+        dishManaPane2=new DishManagePane2();
         /**
          *
          *
@@ -140,7 +141,7 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
                 panel.removeAll();
-                panel.add("ty",employeeManagePane2);
+                panel.add("ty",employeeManaPane2);
                 panel.validate();
                 repaint();
             }
@@ -151,7 +152,7 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
                 panel.removeAll();
-                panel.add("dmp",deskManagePane2);
+                panel.add("dmp",deskManaPane2);
                 panel.validate();
                 repaint();
             }
@@ -161,6 +162,15 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 panel.removeAll();
                 panel.add("cmg",cateManaPane2);
+                panel.validate();
+                repaint();
+            }
+        });
+        dishesManege.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panel.removeAll();
+                panel.add("jk",dishManaPane2);
                 panel.validate();
                 repaint();
             }
