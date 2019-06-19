@@ -10,9 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class OrderDaoImpl implements IBaseDAO {
     Order order;
@@ -110,8 +109,9 @@ public class OrderDaoImpl implements IBaseDAO {
             Iterator it=list.iterator();
             while (it.hasNext()) {
                 Order order=(Order) it.next();
-                int id=order.getId();
-                String orderNo = order.getOrderNo();
+                SimpleDateFormat df=new SimpleDateFormat("yyyyMMddHHmmss");
+                String time=df.format(new Date(System.currentTimeMillis()));
+                String orderNo=time+randno();
                 int deskId=order.getDeskId();
                 double money=order.getMoney();
                 int customerId=order.getCustomerId();
@@ -217,4 +217,17 @@ public class OrderDaoImpl implements IBaseDAO {
             e.printStackTrace();
         }
     }
+
+    public String randno(){
+        Random random=new Random();
+        String fourRandom=random.nextInt(10000)+"";
+        int randl=fourRandom.length();
+        if(randl<4){
+            for (int i=0;i<4-randl;i++){
+                fourRandom="0"+fourRandom;
+            }
+        }
+        return fourRandom;
+    }
+
 }

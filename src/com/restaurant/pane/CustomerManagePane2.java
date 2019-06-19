@@ -2,6 +2,7 @@ package com.restaurant.pane;
 
 import com.restaurant.dao.IBaseDAO;
 import com.restaurant.entity.Customer;
+import com.restaurant.frame.CustomerAddDialog;
 import com.restaurant.util.ChangeCustomerEvent;
 import com.restaurant.util.CustomerDaoFactory;
 import com.restaurant.util.CustomerTableModel;
@@ -103,7 +104,9 @@ public class CustomerManagePane2 extends JPanel {
             add = new JButton("添加");
             add.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    addCustomer();
+                    CustomerAddDialog cad=new CustomerAddDialog();
+                    cad.setVisible(true);
+                   // addCustomer();
                 }
             });
             return add;

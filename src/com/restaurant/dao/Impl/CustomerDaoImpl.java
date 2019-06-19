@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
+
 /**
  * @author zhangrong
  * 实现客户业务逻辑类
@@ -77,7 +79,7 @@ public class CustomerDaoImpl implements IBaseDAO{
                 String sex = customer.getSex();
                 String company = customer.getCompany();
                 String tel = customer.getTel();
-                String cardID = customer.getCardID();
+                String cardID = randno();
                 sql = "insert into customer(name,sex,company,tel,cardID) values(?,?,?,?,?)";
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, name);
@@ -177,6 +179,40 @@ public class CustomerDaoImpl implements IBaseDAO{
                 e.printStackTrace();
             }
         }
+    }
+    public String randno(){
+        Random random=new Random();
+        String fourRandom=random.nextInt(1000000)+"";
+        int randl=fourRandom.length();
+        if(randl<4){
+            for (int i=0;i<9-randl;i++){
+                fourRandom="0"+fourRandom;
+            }
+        }
+        return fourRandom;
+    }
+    public boolean save(Customer customer){
+        Connection conn = JDBConnection.getConn();
+        PreparedStatement ps = null;
+        String name=customer.getName();
+        String sex=customer.getSex();
+        String company=customer.getCompany();
+        String tel=customer.getTel();
+        String cardID=randno();
+        String s1 = "insert into customer(name,sex,company,tel,cardID) values(?,?,?,?,?)";
+        try {
+            ps = conn.prepareStatement(s1);
+            ps.setString(1, name);
+            ps.setString(2, sex);
+            ps.setString(3, company);
+            ps.setString(4, tel);
+            ps.setString(5, cardID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return true;
     }
 
 }
