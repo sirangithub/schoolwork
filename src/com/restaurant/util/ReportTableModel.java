@@ -11,7 +11,7 @@ import java.util.List;
 public class ReportTableModel extends AbstractTableModel {
     private static List changelist = new ArrayList();
     private List list = new ArrayList();
-    private String[] column = {"序号","桌号", "菜名", "价格", "数量"};
+    private String[] column = {"序号","桌号", "菜名", "价格", "数量","时间"};
 
     public ReportTableModel() {
 
@@ -50,6 +50,8 @@ public class ReportTableModel extends AbstractTableModel {
                 return report.getPrice();
             case 4:
                 return report.getAmount();
+            case 5:
+                return report.getOtime();
         }
         return null;
     }
@@ -75,6 +77,8 @@ public class ReportTableModel extends AbstractTableModel {
             case 4:
                 report.setAmount(Integer.parseInt(value));
                 break;
+            case 5:
+                report.setOtime(value);
         }
         fireTableDataChanged();
     }

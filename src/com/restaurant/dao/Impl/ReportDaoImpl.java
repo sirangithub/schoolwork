@@ -17,7 +17,7 @@ public class ReportDaoImpl implements IBaseDAO {
     @Override
     public List getList() {
         Connection conn = JDBConnection.getConn();
-        String sql = "select report.id,deskno,dishname,price,amount from report,dish\n" +
+        String sql = "select report.id,deskno,dishname,price,amount,otime from report,dish\n" +
                 "where report.dishname=dish.name order by report.id desc";
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -37,6 +37,7 @@ public class ReportDaoImpl implements IBaseDAO {
                 report.setDishname(rs.getString("dishname"));
                 report.setPrice(rs.getDouble("price"));
                 report.setAmount(rs.getInt("amount"));
+                report.setOtime(rs.getString("otime"));
                 list.add(report);
             }
         } catch (SQLException e) {

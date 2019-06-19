@@ -113,20 +113,18 @@ public class OrderDaoImpl implements IBaseDAO {
                 int id=order.getId();
                 String orderNo = order.getOrderNo();
                 int deskId=order.getDeskId();
-                String createtime=order.getCreatetime();
                 double money=order.getMoney();
                 int customerId=order.getCustomerId();
                 String status=order.getStatus();
                 int number=order.getNumber();
-                sql = "insert into orderinfo(orderNo,deskId,createtime,money,customerId,status,number) values (?,?,?,?,?,?,?)";
+                sql = "insert into orderinfo(orderNo,deskId,money,customerId,status,number) values (?,?,?,?,?,?)";
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, orderNo);
                 ps.setInt(2,deskId);
-                ps.setString(3, createtime);
-                ps.setDouble(4,money);
-                ps.setInt(5,customerId);
-                ps.setString(6,status);
-                ps.setInt(7,number);
+                ps.setDouble(3,money);
+                ps.setInt(4,customerId);
+                ps.setString(5,status);
+                ps.setInt(6,number);
                 ps.executeUpdate();
             }
         }catch (SQLException e) {

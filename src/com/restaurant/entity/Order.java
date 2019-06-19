@@ -1,6 +1,8 @@
 package com.restaurant.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -11,7 +13,7 @@ public class Order implements Serializable {
     private int id;  //订单序号
     private String orderNo;  //订单编号（自动生成，由当前日期+4位随机数）
     private int deskId;  //餐台号（外键）
-    private String createtime;  //就餐日期时间
+    private Timestamp createtime;  //就餐日期时间
     private double money;  //金额
     private int customerId;  //客户编号
     private String status;  //订单状态：已支付，未支付
@@ -35,10 +37,14 @@ public class Order implements Serializable {
         this.deskId = deskId;
     }
     public String getCreatetime() {
-        return createtime;
+        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String createtimes=df.format(createtime);
+        return createtimes;
     }
-    public void setCreatetime(String createtime) {
-        this.createtime = createtime;
+    public void setCreatetime(String createtimet) {
+        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        createtimet=df.format(new Date());
+        createtime=Timestamp.valueOf(createtimet);
     }
     public double getMoney() {
         return money;
