@@ -11,7 +11,7 @@ import java.util.List;
 public class ReportTableModel extends AbstractTableModel {
     private static List changelist = new ArrayList();
     private List list = new ArrayList();
-    private String[] column = {"桌号", "菜名", "价格", "数量"};
+    private String[] column = {"序号","桌号", "菜名", "价格", "数量"};
 
     public ReportTableModel() {
 
@@ -35,7 +35,7 @@ public class ReportTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int arg0, int arg1) {
         Report report = (Report) list.get(arg0);
-        return getPropertyValueByCol(report, arg1);//未完成
+        return getPropertyValueByCol(report, arg1);
     }
 
     public Object getPropertyValueByCol(Report report, int col) {
@@ -54,14 +54,14 @@ public class ReportTableModel extends AbstractTableModel {
         return null;
     }
 
-    /*public void setValueAt(Object avalue, int rowIndex, int columnIndex) {
+    public void setValueAt(Object avalue, int rowIndex, int columnIndex) {
         Report report = (Report) list.get(rowIndex);
         setPropertyValueByCol(report, avalue.toString(), columnIndex);
         this.fireTableCellUpdated(rowIndex, columnIndex);
 
-    }*/
+    }
 
-   /* public void setPropertyValueByCol(Report report, String value, int col) {
+   public void setPropertyValueByCol(Report report, String value, int col) {
         switch (col) {
             case 1:
                 report.setDeskno(value);
@@ -77,7 +77,7 @@ public class ReportTableModel extends AbstractTableModel {
                 break;
         }
         fireTableDataChanged();
-    }*/
+    }
 
     public void addRow(int index, Report report) {
         if (index < 0 || index > list.size() - 1) {

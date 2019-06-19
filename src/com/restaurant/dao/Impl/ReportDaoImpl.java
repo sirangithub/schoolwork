@@ -18,7 +18,7 @@ public class ReportDaoImpl implements IBaseDAO {
     public List getList() {
         Connection conn = JDBConnection.getConn();
         String sql = "select report.id,deskno,dishname,price,amount from report,dish\n" +
-                "where report.dishname=dish.name";
+                "where report.dishname=dish.name order by report.id desc";
         PreparedStatement ps = null;
         ResultSet rs = null;
         List list = new ArrayList();

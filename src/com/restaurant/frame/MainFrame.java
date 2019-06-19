@@ -11,9 +11,9 @@ import java.awt.event.ActionListener;
 public class MainFrame extends JFrame {
     JPanel panel;
     JMenuBar bar;
-    JMenu systemMenu,deskMenu,dishesMenu,orderMenu,checkoutMenu,helpMenu;
+    JMenu systemMenu,deskMenu,dishesMenu,orderMenu,checkoutMenu,reportMenu,helpMenu;
     JMenuItem emplManage,custManage,pwdManage,categoryManage,dishesManege,
-    aboutmeManage,orderManage,checkoutManage,orderItemManage,deskManage;
+    aboutmeManage,orderManage,checkoutManage,orderItemManage,deskManage,reportManage;
     FlowLayout layout=new FlowLayout();
 
     EmployeeManagePane2 employeeManaPane2;
@@ -23,6 +23,7 @@ public class MainFrame extends JFrame {
     DeskManagePane2 deskManaPane2;
     OrderManagePane2 orderManaPane2;
     OrderDishes orderDishes;
+    ReportManagePane2 reportManaPane2;
     Check check;
 
     MainFrame(){
@@ -39,6 +40,7 @@ public class MainFrame extends JFrame {
         dishesMenu=new JMenu("菜品管理");
         orderMenu=new JMenu("业务管理");
         checkoutMenu=new JMenu("结转管理");
+        reportMenu=new JMenu("近期盈利情况");
         helpMenu=new JMenu("帮助");
         /**
          *
@@ -67,6 +69,10 @@ public class MainFrame extends JFrame {
         /**
          *
          */
+        reportManage=new JMenuItem("盈利报表");
+        /**
+         *
+         */
         aboutmeManage=new JMenuItem("关于我们");
         /**
          *
@@ -76,6 +82,7 @@ public class MainFrame extends JFrame {
         bar.add(dishesMenu);
         bar.add(orderMenu);
         bar.add(checkoutMenu);
+        bar.add(reportMenu);
         bar.add(helpMenu);
 
         systemMenu.add(emplManage);
@@ -102,27 +109,22 @@ public class MainFrame extends JFrame {
         /**
          *
          */
+        reportMenu.add(reportManage);
+        /**
+         *
+         */
         helpMenu.add(aboutmeManage);
         /**
          *
          */
         panel=new JPanel();
 
-
-        employeeManaPane2=new EmployeeManagePane2();
-        customerManaPane2=new CustomerManagePane2();
-        cateManaPane2=new CategoryManagePane2();
-        dishManaPane2=new DishManagePane2();
-        deskManaPane2=new DeskManagePane2();
-        orderManaPane2=new OrderManagePane2();
-        orderDishes=new OrderDishes();
-        check=new Check();
-
         emplManage.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
+                employeeManaPane2=new EmployeeManagePane2();
                 panel.removeAll();
                 panel.add("ty",employeeManaPane2);
                 panel.validate();
@@ -145,6 +147,7 @@ public class MainFrame extends JFrame {
         categoryManage.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                cateManaPane2=new CategoryManagePane2();
                 panel.removeAll();
                 panel.add("cmg",cateManaPane2);
                 panel.validate();
@@ -154,6 +157,7 @@ public class MainFrame extends JFrame {
         dishesManege.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dishManaPane2=new DishManagePane2();
                 panel.removeAll();
                 panel.add("jk",dishManaPane2);
                 panel.validate();
@@ -165,6 +169,7 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
+                deskManaPane2=new DeskManagePane2();
                 panel.removeAll();
                 panel.add("dmp",deskManaPane2);
                 panel.validate();
@@ -174,6 +179,7 @@ public class MainFrame extends JFrame {
         orderManage.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                orderManaPane2=new OrderManagePane2();
                 panel.removeAll();;
                 panel.add("omp",orderManaPane2);
                 panel.validate();
@@ -185,6 +191,7 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
+                orderDishes=new OrderDishes();
                 panel.removeAll();
                 panel.add("od",orderDishes);
                 panel.validate();
@@ -196,8 +203,20 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
+                check=new Check();
                 panel.removeAll();
                 panel.add("che",check);
+                panel.validate();
+                repaint();
+            }
+        });
+        reportManage.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                reportManaPane2=new ReportManagePane2();
+                panel.removeAll();
+                panel.add("rep",reportManaPane2);
                 panel.validate();
                 repaint();
             }
