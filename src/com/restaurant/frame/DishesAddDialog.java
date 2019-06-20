@@ -13,6 +13,8 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.restaurant.util.Constant.*;
+
 public class DishesAddDialog extends JDialog {
     Dish dish = null;
     DishDaoImpl ddi = null;
@@ -78,8 +80,8 @@ public class DishesAddDialog extends JDialog {
         final JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridBagLayout());
         getContentPane().add(buttonPanel, BorderLayout.SOUTH);
-        JButton okBtn = new JButton("确定");
-        JButton cancleBtn = new JButton("取消");
+        JButton okBtn = new JButton(OK);
+        JButton cancleBtn = new JButton(CANCER);
         buttonPanel.add(okBtn);
         buttonPanel.add(cancleBtn);
         okBtn.addActionListener(new ActionListener(){
@@ -102,7 +104,7 @@ public class DishesAddDialog extends JDialog {
                 dish.setStatus(statusTxt.getText());
                 ddi.save(dish);
                 setVisible(false);
-                JOptionPane.showMessageDialog(null,"添加成功");
+                JOptionPane.showMessageDialog(null,ASUCCESS);
             }
 
         });

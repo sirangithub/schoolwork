@@ -32,7 +32,8 @@ public class Constant implements Serializable {
     public static final String UNBOOKED="未预订";
     public static final String BOOKED="已预订";
     public static final String DTM="就餐中";
-    public static final String CHECKOUT="已结账";
+    public static final String EMPTY="空闲中";
+    //public static final String CHECKOUT="已结账";
 
     //订单状态
     public static final String PAID="已支付";
@@ -45,4 +46,7 @@ public class Constant implements Serializable {
     public static final String SURE="确定删除?";
     public static final String OPTION="请选择要删除的行！";
     public static final String USUCCESS="更新成功";
+    public static final String OK="确定";
+    public static final String CANCER="取消";
+   public static final String ASUCCESS="添加成功";
 }

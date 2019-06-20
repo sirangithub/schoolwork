@@ -21,6 +21,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
+import static com.restaurant.util.Constant.*;
+
 public class OrderDishes extends JPanel {
     private JTextField textField;
     private JTextField textField_1;
@@ -87,7 +89,7 @@ public class OrderDishes extends JPanel {
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {////////////////////////////////////////点菜按钮
 
-                String man="满";
+               //String man="满";
                 PreparedStatement ps=null;//
                 ResultSet rs=null;
                 conn= JDBConnection.getConn();//
@@ -102,7 +104,7 @@ public class OrderDishes extends JPanel {
                 String str="update desk set status=? where id=?";
                 try {
                     ps=conn.prepareStatement(str);
-                    ps.setString(1, man);
+                    ps.setString(1, DTM);
                     ps.setInt(2, id);
                     ps.executeUpdate();
                 } catch (SQLException e2) {
@@ -113,7 +115,7 @@ public class OrderDishes extends JPanel {
                 String string="update orderinfo set status=? where deskId=?";
                 try {
                     ps=conn.prepareStatement(string);
-                    ps.setString(1, man);
+                    ps.setString(1, DTM);
                     ps.setInt(2, id);
                     ps.executeUpdate();
                 } catch (SQLException e2) {

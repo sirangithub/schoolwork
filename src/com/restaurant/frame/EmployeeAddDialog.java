@@ -88,8 +88,8 @@ public class EmployeeAddDialog extends JDialog {
         final JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridBagLayout());
         getContentPane().add(buttonPanel, BorderLayout.SOUTH);
-        JButton okBtn = new JButton("确定");
-        JButton cancleBtn = new JButton("取消");
+        JButton okBtn = new JButton(OK);
+        JButton cancleBtn = new JButton(CANCER);
         buttonPanel.add(okBtn);
         buttonPanel.add(cancleBtn);
         okBtn.addActionListener(new ActionListener() {
@@ -111,7 +111,7 @@ public class EmployeeAddDialog extends JDialog {
                 employee.setFreeze(str3);
                 employeeDao.save(employee);
                 setVisible(false);
-                JOptionPane.showMessageDialog(null,"添加成功");
+                JOptionPane.showMessageDialog(null,ASUCCESS);
             }
         });
         cancleBtn.addActionListener(new ActionListener() {

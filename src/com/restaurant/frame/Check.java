@@ -19,6 +19,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
+import static com.restaurant.util.Constant.*;
+
 public class Check extends JPanel {
     private JTextField textField;
     private JTextField textField_1;
@@ -144,11 +146,11 @@ public class Check extends JPanel {
         button_2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 conn=JDBConnection.getConn();//
-                String kong="空";///
+                //String kong="空";///
                 String str="update desk set status=? where id=?";
                 try {
                     ps=conn.prepareStatement(str);
-                    ps.setString(1, kong);
+                    ps.setString(1, EMPTY);
                     ps.setInt(2, id);
                     ps.executeUpdate();
                 } catch (SQLException e2) {
@@ -159,7 +161,7 @@ public class Check extends JPanel {
                 String string="update orderinfo set status=? where deskId=?";
                 try {
                     ps=conn.prepareStatement(string);
-                    ps.setString(1, kong);
+                    ps.setString(1, EMPTY);
                     ps.setInt(2, id);
                     ps.executeUpdate();
                 } catch (SQLException e2) {
