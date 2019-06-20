@@ -1,6 +1,7 @@
 package com.restaurant.pane;
 
 import com.restaurant.dao.IBaseDAO;
+import com.restaurant.dao.Impl.OrderDaoImpl;
 import com.restaurant.entity.Order;
 import com.restaurant.util.ChangeOrderEvent;
 import com.restaurant.util.OrderDaoFactory;
@@ -27,6 +28,7 @@ public class OrderManagePane2 extends JPanel {
     private JTable table = null;
     private OrderTableModel model = null;
     private List listOrder = null;
+    OrderDaoImpl orderDao=new OrderDaoImpl();
     public OrderTableModel getModel() {
         if (null == model) {
             model = new OrderTableModel(listOrder);
@@ -153,6 +155,7 @@ public class OrderManagePane2 extends JPanel {
         // 如果是新增就调用saveList,支持一次增加多行
         if (newRow.size() > 0) {
             dao.saveList(newRow);
+            orderDao.ChangeDesk2(newRow);
             getModel().setList(dao.getList());
             getTable().updateUI();
             newRow.clear();
@@ -168,6 +171,7 @@ public class OrderManagePane2 extends JPanel {
             getModel().deleteRow(rows[i]);
         }
         dao.deleteList(list);
+        orderDao.ChangeDesk(list);
         getTable().updateUI();
         list.clear();
     }

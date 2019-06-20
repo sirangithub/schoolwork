@@ -308,6 +308,14 @@ public class DishDaoImpl implements IBaseDAO{
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        }finally {
+            try {
+                ps.close();
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "关闭数据连接时出错!");
+                e.printStackTrace();
+            }
         }
         return true;
     }

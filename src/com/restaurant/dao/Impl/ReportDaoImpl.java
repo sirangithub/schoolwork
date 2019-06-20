@@ -95,8 +95,4 @@ public class ReportDaoImpl implements IBaseDAO {
 
     }
 
-    public static void main(String [] args){
-        IBaseDAO iBaseDAO=new ReportDaoImpl();
-        System.out.println(iBaseDAO.getList());
-    }
 }

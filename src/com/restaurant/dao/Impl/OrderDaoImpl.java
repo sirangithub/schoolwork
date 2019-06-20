@@ -6,12 +6,12 @@ import com.restaurant.entity.Order;
 import com.restaurant.util.Changed;
 
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
+
+import static com.restaurant.util.Constant.*;
 
 public class OrderDaoImpl implements IBaseDAO {
     Order order;
@@ -115,7 +115,7 @@ public class OrderDaoImpl implements IBaseDAO {
                 int deskId=order.getDeskId();
                 double money=order.getMoney();
                 int customerId=order.getCustomerId();
-                String status=order.getStatus();
+                String status=EMPTY;
                 int number=order.getNumber();
                 sql = "insert into orderinfo(orderNo,deskId,money,customerId,status,number) values (?,?,?,?,?,?)";
                 ps = conn.prepareStatement(sql);
@@ -127,6 +127,9 @@ public class OrderDaoImpl implements IBaseDAO {
                 ps.setInt(6,number);
                 ps.executeUpdate();
             }
+        }catch (SQLIntegrityConstraintViolationException e){
+            JOptionPane.showMessageDialog(null,"对不起，您无法重复添加");
+            e.printStackTrace();
         }catch (SQLException e) {
             System.out.println("添加数据时出错！");
             JOptionPane.showMessageDialog(null, "添加数据时出错！");
@@ -215,6 +218,14 @@ public class OrderDaoImpl implements IBaseDAO {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "修改数据时出错！");
             e.printStackTrace();
+        }finally {
+            try {
+                ps.close();
+                conn.close();
+            }catch (SQLException e){
+                JOptionPane.showMessageDialog(null, "关闭数据连接时出错");
+                e.printStackTrace();
+            }
         }
     }
 
@@ -230,4 +241,57 @@ public class OrderDaoImpl implements IBaseDAO {
         return fourRandom;
     }
 
+    public void ChangeDesk(List list){  //ORDER表中删除一条数据时改变DESK表中STATUS状态
+        String deskid="";
+        Iterator it=list.iterator();
+        Connection conn=JDBConnection.getConn();
+        PreparedStatement ps=null;
+        String sql="update desk set status=? where no=?";
+        try {
+            while (it.hasNext()) {
+                deskid= String.valueOf(((Order)it.next()).getDeskId());
+                ps=conn.prepareStatement(sql);
+                ps.setString(1, UNBOOKED);
+                ps.setString(2,deskid);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                ps.close();
+                conn.close();
+            }catch (SQLException e){
+                JOptionPane.showMessageDialog(null, "关闭数据连接时出错");
+                e.printStackTrace();
+            }
+        }
+    }
+    public void ChangeDesk2(List list){  //ORDER表中增添一条数据时改变DESK表中STATUS状态
+        String deskid;
+        Iterator it=list.iterator();
+        Connection conn=JDBConnection.getConn();
+        PreparedStatement ps=null;
+        String sql="update desk set status=? where no=?";
+        try {
+            while (it.hasNext()) {
+                deskid= String.valueOf(((Order)it.next()).getDeskId());
+                ps=conn.prepareStatement(sql);
+                ps.setString(1,EMPTY);
+                ps.setString(2,deskid);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                ps.close();
+                conn.close();
+            }catch (SQLException e){
+                JOptionPane.showMessageDialog(null, "关闭数据连接时出错");
+                e.printStackTrace();
+            }
+        }
+
+    }
 }
