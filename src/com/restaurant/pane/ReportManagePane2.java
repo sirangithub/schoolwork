@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.restaurant.util.Constant.*;
+
 public class ReportManagePane2 extends JPanel {
     private JPanel panelTop = null;
     private JLabel labHeader = null;
@@ -92,17 +94,17 @@ public class ReportManagePane2 extends JPanel {
 
     public JButton getDelete() {
         if (null == delete) {
-            delete = new JButton("删除");
+            delete = new JButton(DELETE);
             delete.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
 
                     int[] rows = getTable().getSelectedRows();
                     if (rows.length > 0) {
-                        int flag = JOptionPane.showConfirmDialog(null, "确定删除?");
+                        int flag = JOptionPane.showConfirmDialog(null, SURE);
                         if (flag == JOptionPane.YES_OPTION)
                             deleteReport();
                     } else
-                        JOptionPane.showMessageDialog(null, "请选择要删除的行！");
+                        JOptionPane.showMessageDialog(null, OPTION);
                 }
             });
             return delete;

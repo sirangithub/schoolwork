@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.restaurant.util.Constant.*;
+
 public class CategoryManagePane2 extends JPanel {
     private JPanel panelTop = null;
     private JLabel labHeader = null;
@@ -93,7 +95,7 @@ public class CategoryManagePane2 extends JPanel {
          * 点该按钮的时候调用addProduct()方法,在数据源(listProduct)将 增加一个元素,没设值前都是null.
          */
         if (null == add) {
-            add = new JButton("添加");
+            add = new JButton(ADD);
             add.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     addCategory();
@@ -105,7 +107,7 @@ public class CategoryManagePane2 extends JPanel {
     }
     public JButton getDelete() {
         if (null == delete) {
-            delete = new JButton("删除");
+            delete = new JButton(DELETE);
             delete.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     /**
@@ -113,11 +115,11 @@ public class CategoryManagePane2 extends JPanel {
                      */
                     int[] rows = getTable().getSelectedRows();
                     if (rows.length > 0) {
-                        int flag = JOptionPane.showConfirmDialog(null, "确定删除?");
+                        int flag = JOptionPane.showConfirmDialog(null, SURE);
                         if (flag == JOptionPane.YES_OPTION)
                             deleteCategory();
                     } else
-                        JOptionPane.showMessageDialog(null, "请选择要删除的行！");
+                        JOptionPane.showMessageDialog(null, OPTION);
                 }
             });
             return delete;
@@ -126,11 +128,11 @@ public class CategoryManagePane2 extends JPanel {
     }
     public JButton getSave() {
         if (null == save) {
-            save = new JButton("保存");
+            save = new JButton(SAVE);
             save.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     saveCategory();
-                    JOptionPane.showMessageDialog(null, "更新成功！");
+                    JOptionPane.showMessageDialog(null, USUCCESS);
                 }
             });
             return save;

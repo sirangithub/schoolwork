@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.restaurant.util.Constant.*;
+
 public class OrderManagePane2 extends JPanel {
     private JPanel panelTop = null;
     private JLabel labHeader = null;
@@ -93,7 +95,7 @@ public class OrderManagePane2 extends JPanel {
     public JButton getAdd() {
 
         if (null == add) {
-            add = new JButton("添加");
+            add = new JButton(ADD);
             add.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     addOrder();
@@ -105,17 +107,17 @@ public class OrderManagePane2 extends JPanel {
     }
     public JButton getDelete() {
         if (null == delete) {
-            delete = new JButton("删除");
+            delete = new JButton(DELETE);
             delete.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
 
                     int[] rows = getTable().getSelectedRows();
                     if (rows.length > 0) {
-                        int flag = JOptionPane.showConfirmDialog(null, "确定删除?");
+                        int flag = JOptionPane.showConfirmDialog(null, SURE);
                         if (flag == JOptionPane.YES_OPTION)
                             deleteOrder();
                     } else
-                        JOptionPane.showMessageDialog(null, "请选择要删除的行！");
+                        JOptionPane.showMessageDialog(null, OPTION);
                 }
             });
             return delete;
@@ -124,11 +126,11 @@ public class OrderManagePane2 extends JPanel {
     }
     public JButton getSave() {
         if (null == save) {
-            save = new JButton("保存");
+            save = new JButton(SAVE);
             save.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     saveOrder();
-                    JOptionPane.showMessageDialog(null, "更新成功！");
+                    JOptionPane.showMessageDialog(null, USUCCESS);
                 }
             });
             return save;

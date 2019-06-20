@@ -26,16 +26,17 @@ import static com.restaurant.util.Constant.*;
 
 public class EmployeeDaoImpl implements IBaseDAO {
     Employee employee;
+
     public Employee getEmployeeById(int id) {
-        employee=new Employee();
-        Connection conn=JDBConnection.getConn();
-        String s1="select * from employee where id=?";
-        PreparedStatement ps=null;
-        ResultSet rs=null;
+        employee = new Employee();
+        Connection conn = JDBConnection.getConn();
+        String s1 = "select * from employee where id=?";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            ps=conn.prepareStatement(s1);
+            ps = conn.prepareStatement(s1);
             ps.setInt(1, id);
-            rs=ps.executeQuery();
+            rs = ps.executeQuery();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             JOptionPane.showMessageDialog(null, "取出employee全部数据出错");
@@ -56,7 +57,7 @@ public class EmployeeDaoImpl implements IBaseDAO {
             // TODO: handle exception
             JOptionPane.showMessageDialog(null, "取出employee数据出错");
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 rs.close();
                 ps.close();
@@ -69,17 +70,18 @@ public class EmployeeDaoImpl implements IBaseDAO {
         }
         return employee;
     }
+
     public Employee getStaffByIdentityID(String identityID) {
-        employee=new Employee();
-        Connection conn=JDBConnection.getConn();
-        String s1="select * from employee where identityID=?";
-        PreparedStatement ps=null;
-        ResultSet rs=null;
+        employee = new Employee();
+        Connection conn = JDBConnection.getConn();
+        String s1 = "select * from employee where identityID=?";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            ps=conn.prepareStatement(s1);
+            ps = conn.prepareStatement(s1);
             ps.setString(1, identityID);
-            rs=ps.executeQuery();
-        }catch (SQLException e) {
+            rs = ps.executeQuery();
+        } catch (SQLException e) {
             // TODO Auto-generated catch block
             JOptionPane.showMessageDialog(null, "取出employee全部数据出错");
             e.printStackTrace();
@@ -99,7 +101,7 @@ public class EmployeeDaoImpl implements IBaseDAO {
             // TODO: handle exception
             JOptionPane.showMessageDialog(null, "取出employee数据出错");
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 rs.close();
                 ps.close();
@@ -124,7 +126,7 @@ public class EmployeeDaoImpl implements IBaseDAO {
         try {
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("取出全部数据出错！");
             JOptionPane.showMessageDialog(null, "取出全部数据出错！");
             e.printStackTrace();
@@ -146,7 +148,7 @@ public class EmployeeDaoImpl implements IBaseDAO {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "取出全部数据出错！");
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 rs.close();
                 ps.close();
@@ -169,7 +171,6 @@ public class EmployeeDaoImpl implements IBaseDAO {
             Iterator it = list.iterator();
             while (it.hasNext()) {
                 Employee employee = (Employee) it.next();
-                int id=employee.getId();
                 String name = employee.getName();
                 String sex = employee.getSex();
                 String birthday = employee.getBirthday();
@@ -194,7 +195,7 @@ public class EmployeeDaoImpl implements IBaseDAO {
             System.out.println("添加数据时出错！");
             JOptionPane.showMessageDialog(null, "添加数据时出错！");
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 ps.close();
                 conn.close();
@@ -208,21 +209,21 @@ public class EmployeeDaoImpl implements IBaseDAO {
     @Override
     public void deleteList(List list) {
         // TODO Auto-generated method stub
-        String str="delete from employee where id=?";
-        int id=0;
-        Iterator it=list.iterator();
-        Connection conn=JDBConnection.getConn();
-        PreparedStatement ps=null;
+        String str = "delete from employee where id=?";
+        int id = 0;
+        Iterator it = list.iterator();
+        Connection conn = JDBConnection.getConn();
+        PreparedStatement ps = null;
         try {
             while (it.hasNext()) {
-                id=((Employee)it.next()).getId();
-                ps=conn.prepareStatement(str);
+                id = ((Employee) it.next()).getId();
+                ps = conn.prepareStatement(str);
                 ps.setInt(1, id);
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
             // TODO: handle exception
-        }finally {
+        } finally {
             try {
                 ps.close();
                 conn.close();
@@ -285,7 +286,7 @@ public class EmployeeDaoImpl implements IBaseDAO {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "修改数据时出错！");
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 ps.close();
                 conn.close();
@@ -296,5 +297,34 @@ public class EmployeeDaoImpl implements IBaseDAO {
         }
     }
 
+    public boolean save(Employee employee) {
+        Connection conn = JDBConnection.getConn();
+        PreparedStatement ps = null;
+        String name = employee.getName();
+        String sex = employee.getSex();
+        String birthday = employee.getBirthday();
+        String identityID = employee.getIdentityID();
+        String address = employee.getAddress();
+        String tel = employee.getTel();
+        String position = employee.getPosition();
+        String freeze = employee.getFreeze();
+        String s1 = "insert into employee(name,sex,birthday,identityID,address,tel,position,freeze) values(?,?,?,?,?,?,?,?)";
+        try {
+            ps = conn.prepareStatement(s1);
+            ps.setString(1, name);
+            ps.setString(2, sex);
+            ps.setString(3, birthday);
+            ps.setString(4, identityID);
+            ps.setString(5, address);
+            ps.setString(6, tel);
+            ps.setString(7, position);
+            ps.setString(8, freeze);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return true;
+    }
 
 }

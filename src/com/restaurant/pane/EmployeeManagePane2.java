@@ -2,6 +2,7 @@ package com.restaurant.pane;
 
 import com.restaurant.dao.IBaseDAO;
 import com.restaurant.entity.Employee;
+import com.restaurant.frame.EmployeeAddDialog;
 import com.restaurant.util.ChangeEmployeeEvent;
 import com.restaurant.util.EmployeeDaoFactory;
 import com.restaurant.util.EmployeeTableModel;
@@ -13,6 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.restaurant.util.Constant.*;
 
 public class EmployeeManagePane2 extends JPanel {
     private JPanel panelTop = null;
@@ -89,13 +92,15 @@ public class EmployeeManagePane2 extends JPanel {
     }
     public JButton getAdd() {
         if (null==add) {
-            add=new JButton("添加");
+            add=new JButton(ADD);
             add.addActionListener(new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
-                    addEmployee();
+                    //addEmployee();
+                    EmployeeAddDialog ead=new EmployeeAddDialog();
+                    ead.setVisible(true);
                 }
             });
             return add;
@@ -104,18 +109,18 @@ public class EmployeeManagePane2 extends JPanel {
     }
     public JButton getDelete() {
         if (null==delete) {
-            delete=new JButton("删除");
+            delete=new JButton(DELETE);
             delete.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
                     int[] rows=getTable().getSelectedRows();
                     if (rows.length>0) {
-                        int flag=JOptionPane.showConfirmDialog(null, "确定删除?");
+                        int flag=JOptionPane.showConfirmDialog(null, SURE);
                         if (flag==JOptionPane.YES_OPTION) {
                             deleteEmployee();
                         }
                     } else {
-                        JOptionPane.showConfirmDialog(null, "请选择要删除的行!");
+                        JOptionPane.showConfirmDialog(null, OPTION);
                     }
                 }
             });
@@ -125,13 +130,13 @@ public class EmployeeManagePane2 extends JPanel {
     }
     public JButton getSave() {
         if (null==save) {
-            save=new JButton("保存");
+            save=new JButton(SAVE);
             save.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
                     saveEmployee();
-                    JOptionPane.showMessageDialog(null, "更新成功employee数据库成功");
+                    JOptionPane.showMessageDialog(null, USUCCESS);
                 }
             });
             return save;

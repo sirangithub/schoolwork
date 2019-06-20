@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import static com.restaurant.util.Constant.*;
+
 public class CustomerAddDialog extends JDialog {
     Customer customer=null;
     CustomerDaoImpl customerDao=null;
@@ -28,12 +30,13 @@ public class CustomerAddDialog extends JDialog {
         JTextField nameTxt=new JTextField(20);
         JLabel sexLable=new JLabel("性别：");
         JComboBox sexIDCombo=new JComboBox();
-        sexIDCombo.addItem("男");
-        sexIDCombo.addItem("女");
-        JLabel comLabel=new JLabel("单位：");
+        sexIDCombo.addItem(MALE);
+        sexIDCombo.addItem(FEMALE);
+        JLabel comLabel=new JLabel("单位");
         JTextField comTxt=new JTextField(20);
-        JLabel telLabel=new JLabel("电话：");
+        JLabel telLabel=new JLabel("电话");
         JTextField telTxt=new JTextField(20);
+
         inputPanel.add(nameLabel);
         inputPanel.add(nameTxt);
         inputPanel.add(sexLable);
@@ -42,6 +45,7 @@ public class CustomerAddDialog extends JDialog {
         inputPanel.add(comTxt);
         inputPanel.add(telLabel);
         inputPanel.add(telTxt);
+
         nameLabel.setBounds(120,20,160,30);
         nameTxt.setBounds(180,20,160,30);
         sexLable.setBounds(120,60,160,30);
@@ -50,6 +54,8 @@ public class CustomerAddDialog extends JDialog {
         comTxt.setBounds(180,100,160,30);
         telLabel.setBounds(120,140,160,30);
         telTxt.setBounds(180,140,160,30);
+
+
         final JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridBagLayout());
         getContentPane().add(buttonPanel, BorderLayout.SOUTH);
@@ -68,9 +74,9 @@ public class CustomerAddDialog extends JDialog {
                 customer.setCompany(comTxt.getText());
                 customer.setSex(str);
                 customer.setTel(telTxt.getText());
-                customer.setCardID(telTxt.getText());
                 customerDao.save(customer);
                 setVisible(false);
+                JOptionPane.showMessageDialog(null,"添加成功");
             }
         });
         cancleBtn.addActionListener(new ActionListener(){

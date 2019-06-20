@@ -101,8 +101,8 @@ public class DishesAddDialog extends JDialog {
                 dish.setPrice(Double.parseDouble(priceTxt.getText()));
                 dish.setStatus(statusTxt.getText());
                 ddi.save(dish);
-
                 setVisible(false);
+                JOptionPane.showMessageDialog(null,"添加成功");
             }
 
         });
