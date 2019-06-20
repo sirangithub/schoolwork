@@ -208,7 +208,6 @@ public class CategoryDaoImpl implements IBaseDAO {
                         break;
                     case 2:
                         str = "update category set describ=? where id=?";
-                        //System.out.println("为什么丢不进");
                         break;
                 }
                 ps = conn.prepareStatement(str);

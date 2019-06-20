@@ -147,7 +147,7 @@ public class Check extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 conn=JDBConnection.getConn();//
                 //String kong="空";///
-                String str="update desk set status=? where id=?";
+                String str="update desk set status=? where no=?";
                 try {
                     ps=conn.prepareStatement(str);
                     ps.setString(1, EMPTY);

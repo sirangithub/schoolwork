@@ -156,10 +156,10 @@ public class CustomerManagePane2 extends JPanel {
     //////////////
     /////////////////
     ///////////////
-    public void addCustomer() {
+   /* public void addCustomer() {
         Customer customer = new Customer();
         getModel().addRow(getTable().getSelectedRow(), customer);
-    }
+    }*/
 
     public void saveCustomer() {
         IBaseDAO dao = CustomerDaoFactory.getDao();

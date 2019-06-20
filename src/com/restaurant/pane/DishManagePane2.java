@@ -141,10 +141,10 @@ public class DishManagePane2 extends JPanel {
         }
         return save;
     }
-    public void addDish() {
+    /*public void addDish() {
         Dish dish = new Dish();
         getModel().addRow(getTable().getSelectedRow(), dish);
-    }
+    }*/
     public void saveDish() {
         IBaseDAO dao = DishDaoFactory.getDao();
         List changeList = getModel().getChangeList();

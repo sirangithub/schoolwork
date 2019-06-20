@@ -101,7 +101,7 @@ public class OrderDishes extends JPanel {
                 name=textField_1.getText();
                 amount=Integer.parseInt(textField_2.getText());
                 /////////////////
-                String str="update desk set status=? where id=?";
+                String str="update desk set status=? where no=?";
                 try {
                     ps=conn.prepareStatement(str);
                     ps.setString(1, DTM);
