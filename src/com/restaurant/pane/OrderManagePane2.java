@@ -3,6 +3,7 @@ package com.restaurant.pane;
 import com.restaurant.dao.IBaseDAO;
 import com.restaurant.dao.Impl.OrderDaoImpl;
 import com.restaurant.entity.Order;
+import com.restaurant.frame.OrderAddDialog;
 import com.restaurant.util.ChangeOrderEvent;
 import com.restaurant.util.OrderDaoFactory;
 import com.restaurant.util.OrderTableModel;
@@ -100,7 +101,8 @@ public class OrderManagePane2 extends JPanel {
             add = new JButton(ADD);
             add.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    addOrder();
+                    OrderAddDialog orderAddDialog=new OrderAddDialog();
+                    orderAddDialog.setVisible(true);
                 }
             });
             return add;
@@ -155,7 +157,7 @@ public class OrderManagePane2 extends JPanel {
         // 如果是新增就调用saveList,支持一次增加多行
         if (newRow.size() > 0) {
             dao.saveList(newRow);
-            orderDao.ChangeDesk2(newRow);
+            //orderDao.ChangeDesk2(newRow);
             getModel().setList(dao.getList());
             getTable().updateUI();
             newRow.clear();

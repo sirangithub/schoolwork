@@ -1,32 +1,39 @@
 package com.restaurant.frame;
 
 import com.restaurant.JDBConnection;
+import com.restaurant.dao.Impl.DishDaoImpl;
+import com.restaurant.dao.Impl.OrderDaoImpl;
+import com.restaurant.entity.Dish;
+import com.restaurant.entity.Order;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.GridBagConstraints;
-import javax.swing.JTextField;
-
 
 
 import java.awt.Insets;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.restaurant.util.Constant.*;
 
 public class OrderDishes extends JPanel {
-    private JTextField textField;
-    private JTextField textField_1;
+    //private JTextField textField;
+    private JComboBox textIDCombo0;
+   // private JTextField textField_1;
+    private JComboBox textIDCombo;
     private JTextField textField_2;
+    DishDaoImpl dishDao=new DishDaoImpl();
+    List<Dish> dishList=dishDao.getCanBeOrdered();
+    OrderDaoImpl orderDao=new OrderDaoImpl();
+    List<Order> orderList=orderDao.getList();
     double sum=-1;
     Connection conn=null;
     public OrderDishes() {
@@ -44,14 +51,18 @@ public class OrderDishes extends JPanel {
         gbc_label.gridy = 1;
         add(label, gbc_label);
 
-        textField = new JTextField();
+        //textField = new JTextField();
+        textIDCombo0=new JComboBox();
+        for(Order order:orderList){
+            textIDCombo0.addItem(order.getDeskId());
+        }
         GridBagConstraints gbc_textField = new GridBagConstraints();
         gbc_textField.insets = new Insets(0, 0, 5, 0);
         gbc_textField.fill = GridBagConstraints.HORIZONTAL;
         gbc_textField.gridx = 3;
         gbc_textField.gridy = 1;
-        add(textField, gbc_textField);
-        textField.setColumns(20);
+        add(textIDCombo0, gbc_textField);
+        //textField.setColumns(20);
 
         JLabel label_1 = new JLabel("\u83DC\u54C1\u540D\u79F0:");
         GridBagConstraints gbc_label_1 = new GridBagConstraints();
@@ -60,14 +71,18 @@ public class OrderDishes extends JPanel {
         gbc_label_1.gridy = 3;
         add(label_1, gbc_label_1);
 
-        textField_1 = new JTextField();
+       // textField_1 = new JTextField();
+        textIDCombo=new JComboBox();
+        for(Dish dish:dishList){
+            textIDCombo.addItem(dish.getName());
+        }
         GridBagConstraints gbc_textField_1 = new GridBagConstraints();
         gbc_textField_1.insets = new Insets(0, 0, 5, 0);
         gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
         gbc_textField_1.gridx = 3;
         gbc_textField_1.gridy = 3;
-        add(textField_1, gbc_textField_1);
-        textField_1.setColumns(20);
+        add(textIDCombo, gbc_textField_1);
+        //textField_1.setColumns(20);
 
         JLabel label_2 = new JLabel("\u83DC\u54C1\u6570\u91CF:");
         GridBagConstraints gbc_label_2 = new GridBagConstraints();
@@ -96,9 +111,11 @@ public class OrderDishes extends JPanel {
                 int id=0;
                 String name="";
                 int amount=0;
-                id=Integer.parseInt(textField.getText());
+                //id=Integer.parseInt(textField.getText());
+                id= (int) textIDCombo0.getSelectedItem();
                 System.out.println(id);
-                name=textField_1.getText();
+               // name=textField_1.getText();
+                name= String.valueOf(textIDCombo.getSelectedItem());
                 amount=Integer.parseInt(textField_2.getText());
                 /////////////////
                 String str="update desk set status=? where no=?";
@@ -170,8 +187,8 @@ public class OrderDishes extends JPanel {
                     }
                 }
                 ////////////////////////
-                textField.setText("");
-                textField_1.setText("");
+                //textField.setText("");
+                //textField_1.setText("");
                 textField_2.setText("");
             }
         });
@@ -184,8 +201,9 @@ public class OrderDishes extends JPanel {
         JButton button_1 = new JButton("\u53D6\u6D88");
         button_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                textField.setText("");
-                textField_1.setText("");
+                //textField.setText("");
+                //textField_1.setText("");
+
                 textField_2.setText("");
             }
         });
@@ -194,6 +212,10 @@ public class OrderDishes extends JPanel {
         gbc_button_1.gridy = 11;
         add(button_1, gbc_button_1);
 
+    }
+    public static void main(String [] args){
+        OrderDishes orderDishes=new OrderDishes();
+        orderDishes.setVisible(true);
     }
 
 }

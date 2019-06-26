@@ -95,4 +95,39 @@ public class ReportDaoImpl implements IBaseDAO {
 
     }
 
+    public double getAllMoney(){
+        double sum=0.0;
+        Connection conn = JDBConnection.getConn();
+        String sql = "select sum(amount*price) from (select report.id,deskno,dishname,price,amount,otime from report,dish\n" +
+                "where report.dishname=dish.name) as a";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List list = new ArrayList();
+        try {
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "取出全部数据出错");
+            e.printStackTrace();
+        }
+        try {
+            while (rs.next()) {
+                sum=sum+rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "取出全部数据出错");
+            e.printStackTrace();
+        }finally {
+            try{
+                rs.close();
+                ps.close();
+                conn.close();
+            }catch (SQLException e){
+                JOptionPane.showMessageDialog(null, "关闭数据库连接出错");
+                e.printStackTrace();
+            }
+        }
+        return sum;
+
+    }
 }

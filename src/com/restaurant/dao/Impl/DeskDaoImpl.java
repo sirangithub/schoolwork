@@ -147,11 +147,11 @@ public class DeskDaoImpl implements IBaseDAO {
             Iterator it = list.iterator();
             while (it.hasNext()) {
                 Desk desk = (Desk) it.next();
-                int id = desk.getId();
+                //int id = desk.getId();
                 String no = desk.getNo();
                 int seating = desk.getSeating();
                 String status = UNBOOKED;
-                getClass();
+                //getClass();
                 s1 = "insert into desk(no,seating,status) values(?,?,?)";
                 ps = conn.prepareStatement(s1);
                 ps.setString(1, no);
@@ -198,6 +198,8 @@ public class DeskDaoImpl implements IBaseDAO {
                     ps = conn.prepareStatement(str);
                     ps.setInt(1, id);
                     ps.executeUpdate();
+                }else {
+                    JOptionPane.showMessageDialog(null,"对不起，您无法删除已预订的");
                 }
             }
         } catch (Exception e) {
@@ -313,6 +315,32 @@ public class DeskDaoImpl implements IBaseDAO {
             JOptionPane.showMessageDialog(null,"对不起，您无法修改已经被预定的餐台号");
             return false;
         }
+    }public boolean save(Desk desk){
+        Connection conn = JDBConnection.getConn();
+        PreparedStatement ps = null;
+        String no = desk.getNo();
+        int seating = desk.getSeating();
+        String status=UNBOOKED;
+        String sql = "insert into desk(no,seating,status) values(?,?,?)";
+        try {
+            ps=conn.prepareStatement(sql);
+            ps.setString(1,no);
+            ps.setInt(2,seating);
+            ps.setString(3,status);
+            ps.executeUpdate();
+        }catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally {
+            try {
+                ps.close();
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "关闭数据连接时出错!");
+                e.printStackTrace();
+            }
+        }
+        return true;
     }
 }
 

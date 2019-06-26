@@ -319,4 +319,51 @@ public class DishDaoImpl implements IBaseDAO{
         }
         return true;
     }
+    public List<Dish> getCanBeOrdered(){
+        Connection conn = JDBConnection.getConn();
+        String s1 = "select * from dish where status='在售'order by id asc";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List list = new ArrayList();
+
+        category=new Category();
+        cdi=new CategoryDaoImpl();
+        try {
+            ps = conn.prepareStatement(s1);
+            rs = ps.executeQuery();
+        } catch (SQLException e) {
+            /*System.out.println("取出dish数据出错！");*/
+            JOptionPane.showMessageDialog(null, "取出dish相关数据出错!");
+            e.printStackTrace();
+        }
+        try {
+            while (rs.next()) {
+                Dish dish = new Dish();
+                dish.setId(rs.getInt(1));
+                dish.setName(rs.getString(2));
+                category=cdi.getCategoryById(rs.getInt(3));
+                dish.setCategory(category);
+                dish.setPic(rs.getString(4));
+                dish.setCode(rs.getString(5));
+                dish.setUnit(rs.getString(6));
+                dish.setPrice(rs.getDouble(7));
+                dish.setStatus(rs.getString(8));
+                list.add(dish);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "取出全部数据出错!");
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "关闭数据连接时出错!");
+                e.printStackTrace();
+            }
+        }
+        return list;
+
+    }
 }

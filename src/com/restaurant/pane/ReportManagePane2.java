@@ -1,6 +1,7 @@
 package com.restaurant.pane;
 
 import com.restaurant.dao.IBaseDAO;
+import com.restaurant.dao.Impl.ReportDaoImpl;
 import com.restaurant.util.ChangeReportEvent;
 import com.restaurant.util.ReportDaoFactory;
 import com.restaurant.util.ReportTableModel;
@@ -18,6 +19,7 @@ import static com.restaurant.util.Constant.*;
 public class ReportManagePane2 extends JPanel {
     private JPanel panelTop = null;
     private JLabel labHeader = null;
+    private JLabel labBottom=null;
     private JPanel panelBottom = null;
     private JButton add = null;
     private JButton delete = null;
@@ -26,6 +28,7 @@ public class ReportManagePane2 extends JPanel {
     private JTable table = null;
     private ReportTableModel model = null;
     private List listReport = null;
+    ReportDaoImpl reportDao=new ReportDaoImpl();
 
     public ReportTableModel getModel() {
         if (null == model) {
@@ -43,6 +46,13 @@ public class ReportManagePane2 extends JPanel {
             return labHeader;
         }
         return labHeader;
+    }
+    public JLabel getSum(){
+        if(null==labBottom){
+            labBottom=new JLabel("最近预计盈利："+reportDao.getAllMoney());
+            return labBottom;
+        }
+        return labBottom;
     }
 
     public JTable getTable() {
@@ -84,15 +94,16 @@ public class ReportManagePane2 extends JPanel {
         if (null == panelBottom) {
             panelBottom = new JPanel();
             panelBottom.setLayout(new FlowLayout(FlowLayout.CENTER));
+            panelBottom.add(getSum());
             //panelBottom.add(getAdd());
-            panelBottom.add(getDelete());
+            //panelBottom.add(getDelete());
             //panelBottom.add(getSave());
             return panelBottom;
         }
         return panelBottom;
     }
 
-    public JButton getDelete() {
+   /* public JButton getDelete() {
         if (null == delete) {
             delete = new JButton(DELETE);
             delete.addActionListener(new ActionListener() {
@@ -110,7 +121,7 @@ public class ReportManagePane2 extends JPanel {
             return delete;
         }
         return delete;
-    }
+    }*/
 
     public void deleteReport() {
 

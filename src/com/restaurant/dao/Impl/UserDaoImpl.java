@@ -1,4 +1,4 @@
-/*package com.restaurant.dao.Impl;
+package com.restaurant.dao.Impl;
 
 import com.restaurant.JDBConnection;
 import com.restaurant.dao.IBaseDAO;
@@ -19,20 +19,23 @@ import java.util.List;
  * @author zhangrong
  * 实现管理员业务逻辑类
  */
-/*public class UserDaoImpl implements IBaseDAO {
+public class UserDaoImpl implements IBaseDAO {
     User user;
-    public User getUser(int id) {
+
+    public User getUser(String username) {
         user = new User();
         Connection conn = JDBConnection.getConn();
-        String sql = "select * from user where id=? ";
+        String sql = "select * from user where username=? ";
         PreparedStatement ps = null;
         ResultSet rs = null;
+        String password = "";
         try {
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setString(1, username);
             rs = ps.executeQuery();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "取出user数据出错！");
+
             e.printStackTrace();
         }
         try {
@@ -42,7 +45,8 @@ import java.util.List;
             user.setPassword(rs.getString("password"));
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "取出user数据出错！");
+            JOptionPane.showMessageDialog(null, "对不起，输入信息有误");
+            System.out.println("取出user数据出错");
             e.printStackTrace();
         } finally {
             try {
@@ -102,13 +106,13 @@ import java.util.List;
         Connection conn = JDBConnection.getConn();
         PreparedStatement ps = null;
         try {
-                String username = list.get(0).toString();
-                String password = "123";
-                sql = "insert into user(username,password) values (?,?)";
-                ps = conn.prepareStatement(sql);
-                ps.setString(1, username);
-                ps.setString(2, password);
-                ps.executeUpdate();
+            String username = list.get(0).toString();
+            String password = "123";
+            sql = "insert into user(username,password) values (?,?)";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ps.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println("添加数据时出错！");
@@ -127,26 +131,10 @@ import java.util.List;
     }
 
     @Override
-    public void deleteList(int id) {
-        String sql = "delete from user where id=?";
-        Connection conn = JDBConnection.getConn();
-        PreparedStatement ps = null;
-        try {
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-        } finally {
-            try {
-                ps.close();
-                conn.close();
-                //System.out.println("删除成功");
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "关闭数据连接出错！");
-                e.printStackTrace();
-            }
-        }
+    public void deleteList(List list) {
+
     }
+
 
     @Override
     public void update(List list) {
@@ -190,36 +178,5 @@ import java.util.List;
         }
     }
 
-    public static void main(String[] args) {
-        UserDaoImpl userDao = new UserDaoImpl();
+}
 
-        /**
-         * 检测插入
-         */
-      /* List<String> list = new ArrayList();
-        list.add("李四");
-        userDao.saveList(list);*/
-        /**
-         * 检测删除
-         */
-        //userDao.deleteList(102);
-        /**
-         * 检测修改
-         */
-        /* List<Changed> list = new ArrayList();
-           Changed ch = new Changed();
-           ch.setId(102);
-           ch.setCol(1);
-           ch.setValue("李老板");
-           list.add(ch);*/
-         /*List<Changed> list = new ArrayList();
-          Changed ch = new Changed();
-          ch.setId(102);
-          ch.setCol(2);
-          ch.setValue("123");
-          list.add(ch);
-          userDao.update(list);*/
-        //System.out.println(userDao.getUser(101));
-        //System.out.println(userDao.getList());
-//    }*/
-//}*/

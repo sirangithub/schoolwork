@@ -1,14 +1,12 @@
 package com.restaurant.frame;
 
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.restaurant.frame.MainFrame;
 
 
 import java.awt.GridBagLayout;
@@ -22,22 +20,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-class UserLogin{
-    String user;
-    String password;
-    public UserLogin(String user,String password) {
-        this.user = user;
-        this.password = password;
-    }
-    public boolean isLoginSuccess() {
-        if (user.equals("admin")&&password.equals("888888")) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-}
+
+
 public class LoginFrame extends JFrame {
     private JPanel contentPane;
     private JTextField textField;
@@ -117,7 +101,7 @@ public class LoginFrame extends JFrame {
                     MainFrame mf=new MainFrame();
                     mf.setTitle("餐饮管理系统");
                 } else {
-                    JOptionPane.showMessageDialog(null, "用户名或者密码错误!");
+                    //JOptionPane.showMessageDialog(null, "用户名或者密码错误!");
                     textField_1.setText("");
                 }
             }

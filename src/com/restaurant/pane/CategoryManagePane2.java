@@ -55,9 +55,9 @@ public class CategoryManagePane2 extends JPanel {
             /**
              * 隐藏第一列ID,不显示出来
              */
-            DefaultTableColumnModel dcm = (DefaultTableColumnModel) table.getColumnModel();
-            dcm.getColumn(0).setMinWidth(0);
-            dcm.getColumn(0).setMaxWidth(0);
+            //DefaultTableColumnModel dcm = (DefaultTableColumnModel) table.getColumnModel();
+            //dcm.getColumn(0).setMinWidth(0);
+            //dcm.getColumn(0).setMaxWidth(0);
             return table;
         }
         return table;
